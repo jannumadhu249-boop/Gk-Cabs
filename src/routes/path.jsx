@@ -38,7 +38,7 @@ import Zones from "../feature-module/Zones/zones";
 import Addzones from "../feature-module/Zones/Addzones";
 import AirportZones from "../feature-module/Airportzones/airportzones";
 import Addairportzones from "../feature-module/Airportzones/Addairportzones";
-import Peakzones from "../feature-module/Peakzones";
+import Peakzones from "../feature-module/Peak Zones/Peakzones";
 import Riders from "../feature-module/Rider/Riders";
 import Riderwallet from "../feature-module/Rider/riderWallet";
 import Verifieddriver from "../feature-module/Driver/verifiedDriver";
@@ -80,9 +80,22 @@ import CancelledRides from "../feature-module/Rides/cancelledRides";
 import CompletedRides from "../feature-module/Rides/completedRides";
 import Export from "../feature-module/export";
 import Chat from "../feature-module/chats";
-import Preferences from "../feature-module/preference";
-import AddPreference from "../feature-module/addpreference";
+import Preferences from "../feature-module/Preference/preference";
+import AddPreference from "../feature-module/Preference/addpreference";
 import ChangePassword from "../components/changepassword/changePassword";
+import SurgePrices from "../feature-module/Surge Price/surgePrices";
+import EditSurgePrice from "../feature-module/Surge Price/editSurgePrice";
+import AddSurgePrice from "../feature-module/Surge Price/addSurgePrice";
+import ActivationSettings from "../feature-module/settings/appsetting/activations";
+import Ride from "../feature-module/settings/appsetting/ridesettings";
+import WalletSettings from "../feature-module/settings/appsetting/walletsettings";
+import RefferalSettings from "../feature-module/settings/appsetting/refferalsettings";
+import Commission from "../feature-module/settings/appsetting/commission";
+import LocationSettings from "../feature-module/settings/appsetting/locationsettings";
+import AddPeakzones from "../feature-module/Peak Zones/addpeakZones";
+import ViewRiderDetails from "../feature-module/Rider/viewrider";
+import ViewRideDetails from "../feature-module/Rider/rideDetails";
+import ViewDriverDetails from "../feature-module/Driver/viewdriverDetails";
 
 const ProductList = lazy(
   () => import("../feature-module/inventory/productlist"),
@@ -158,17 +171,17 @@ const SocialAuthentication = lazy(
 const LanguageSettings = lazy(
   () => import("../feature-module/settings/websitesettings/languagesettings"),
 );
-const InvoiceSettings = lazy(
-  () => import("../feature-module/settings/appsetting/invoicesettings"),
+// const ActivationSettings = lazy(
+//   () => import("../feature-module/settings/appsetting/activations"),
+// );
+const RideSettings = lazy(
+  () => import("../feature-module/settings/appsetting/ridesettings"),
 );
-const PrinterSettings = lazy(
-  () => import("../feature-module/settings/appsetting/printersettings"),
-);
-const PosSettings = lazy(
-  () => import("../feature-module/settings/websitesettings/possettings"),
+const refferalSettings = lazy(
+  () => import("../feature-module/settings/appsetting/refferalsettings"),
 );
 const CustomFields = lazy(
-  () => import("../feature-module/settings/websitesettings/customfields"),
+  () => import("../feature-module/settings/appsetting/locationsettings"),
 );
 const EmailSettings = lazy(
   () => import("../feature-module/settings/systemsettings/emailsettings"),
@@ -518,10 +531,10 @@ const Annualreport = lazy(
   () => import("../feature-module/Reports/annualreport"),
 );
 const InvoiceTemplate = lazy(
-  () => import("../feature-module/settings/appsetting/invoicetemplate"),
+  () => import("../feature-module/settings/appsetting/commission"),
 );
-const Signature = lazy(
-  () => import("../feature-module/settings/appsetting/signature"),
+const walletSettings = lazy(
+  () => import("../feature-module/settings/appsetting/walletsettings"),
 );
 const Emailtemplatesettings = lazy(
   () =>
@@ -615,6 +628,90 @@ const Timeline = lazy(
 const routes = all_routes;
 
 export const authRoutes = [
+  {
+    id: 1,
+    path: routes.viewdriverdetails,
+    name: "Driver",
+    element: <ViewDriverDetails />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.viewridedetails,
+    name: "Rider",
+    element: <ViewRideDetails />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.viewriderdetails,
+    name: "Rider",
+    element: <ViewRiderDetails />,
+    route: Route,
+  },
+    {
+    id: 1,
+    path: routes.locationsettings,
+    name: "App Settings",
+    element: <LocationSettings />,
+    route: Route,
+  },
+    {
+    id: 1,
+    path: routes.refferal,
+    name: "App Settings",
+    element: <RefferalSettings />,
+    route: Route,
+  },
+    {
+    id: 1,
+    path: routes.walletsettings,
+    name: "App Settings",
+    element: <WalletSettings />,
+    route: Route,
+  },
+    {
+    id: 1,
+    path: routes.ridesettings,
+    name: "App Settings",
+    element: <Ride />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.commission,
+    name: "App Settings",
+    element: <Commission />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.activations,
+    name: "App Settings",
+    element: <ActivationSettings />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.addsurgeprice,
+    name: "Surge Prices",
+    element: <AddSurgePrice />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editsurgeprice,
+    name: "Surge Prices",
+    element: <EditSurgePrice />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.surgeprices,
+    name: "Surge Prices",
+    element: <SurgePrices />,
+    route: Route,
+  },
   {
     id: 1,
     path: routes.changepassword,
@@ -904,6 +1001,13 @@ export const authRoutes = [
   },
   {
     id: 1,
+    path: routes.addpeakzones,
+    name: "Peakzones",
+    element: <AddPeakzones   />,
+    route: Route,
+  },
+  {
+    id: 1,
     path: routes.Peakzones,
     name: "Peakzones",
     element: <Peakzones />,
@@ -959,6 +1063,11 @@ export const authRoutes = [
     element: <Dashboard />,
     route: Route,
   },
+
+
+
+
+
   {
     id: 1,
     path: routes.newdashboard,
@@ -1233,34 +1342,34 @@ export const authRoutes = [
     element: <LanguageSettings />,
     route: Route,
   },
-  {
-    id: 74,
-    path: routes.invoicesettings,
-    name: "invoicesettings",
-    element: <InvoiceSettings />,
-    route: Route,
-  },
-  {
-    id: 75,
-    path: routes.printersettings,
-    name: "printersettings",
-    element: <PrinterSettings />,
-    route: Route,
-  },
-  {
-    id: 76,
-    path: routes.possettings,
-    name: "possettings",
-    element: <PosSettings />,
-    route: Route,
-  },
-  {
-    id: 77,
-    path: routes.customfields,
-    name: "customfields",
-    element: <CustomFields />,
-    route: Route,
-  },
+  // {
+  //   id: 74,
+  //   path: routes.invoicesettings,
+  //   name: "invoicesettings",
+  //   element: <InvoiceSetting />,
+  //   route: Route,
+  // },
+  // {
+  //   id: 75,
+  //   path: routes.printersettings,
+  //   name: "printersettings",
+  //   element: <PrinterSettings />,
+  //   route: Route,
+  // },
+  // {
+  //   id: 76,
+  //   path: routes.possettings,
+  //   name: "possettings",
+  //   element: <PosSettings />,
+  //   route: Route,
+  // },
+  // {
+  //   id: 77,
+  //   path: routes.customfields,
+  //   name: "customfields",
+  //   element: <CustomFields />,
+  //   route: Route,
+  // },
   {
     id: 78,
     path: routes.emailsettings,
@@ -2082,13 +2191,13 @@ export const authRoutes = [
     element: <InvoiceTemplate />,
     route: Route,
   },
-  {
-    id: 159,
-    path: routes.signatures,
-    name: "signatures",
-    element: <Signature />,
-    route: Route,
-  },
+  // {
+  //   id: 159,
+  //   path: routes.signatures,
+  //   name: "signatures",
+  //   element: <Signature />,
+  //   route: Route,
+  // },
   {
     id: 160,
     path: routes.emailtemplate,

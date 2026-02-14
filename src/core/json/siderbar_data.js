@@ -41,8 +41,13 @@ export const SidebarData = [
       },
       {
         label: "Peak Zones",
-        link: "/peakzones",
         icon: "fas fa-solid fa-bolt",
+        submenu: true,
+        showSubRoute: false,
+        submenuItems: [
+          { label: "All Peak Zones", link: "/peakzones"},
+          { label: "Add Peak Zones", link: "/addpeakZones"},
+        ]
       },
       {
         label: "Rider",
@@ -129,6 +134,7 @@ export const SidebarData = [
       },
       {
         label: "Surge Prices",
+        link: "/surgePrices",
         icon: "ti ti-trending-up",
         submenu: false,
         showSubRoute: false,
@@ -789,182 +795,182 @@ export const SidebarData = [
   //     },
   //   ],
   // },
-  {
-    label: "Pages",
-    submenuOpen: true,
-    showSubRoute: false,
-    submenuHdr: "Pages",
-    submenuItems: [
-      {
-        label: "Profile",
-        link: "/profile",
-        icon: "user-circle",
-        showSubRoute: false,
-      },
-      {
-        label: "Authentication",
-        submenu: true,
-        showSubRoute: false,
-        icon: "shield",
-        submenuItems: [
-          {
-            label: "Login",
-            link: "/signin",
-            submenu: false,
-            showSubRoute: false,
-            // // submenuItems: [
-            // //   { label: "Cover", link: "/signin", showSubRoute: false },
-            //   // { label: "Illustration", link: "/signin-2", showSubRoute: false },
-            //   // { label: "Basic", link: "/signin-3", showSubRoute: false },
-            // ],
-          },
-          {
-            label: "Register",
-            link: "/register",
-            submenu: false,
-            showSubRoute: false,
-            // submenuItems: [
-            //   { label: "Cover", link: "/register", showSubRoute: false },
-            //   {
-            //     label: "Illustration",
-            //     link: "/register-2",
-            //     showSubRoute: false,
-            //   },
-            //   { label: "Basic", link: "/register-3", showSubRoute: false },
-            // ],
-          },
-          {
-            label: "Forgot Password",
-            link: "/forgot-password",
-            submenu: false,
-            showSubRoute: false,
-            // submenuItems: [
-            //   { label: "Cover", link: "/forgot-password", showSubRoute: false },
-            //   {
-            //     label: "Illustration",
-            //     link: "/forgot-password-2",
-            //     showSubRoute: false,
-            //   },
-            //   {
-            //     label: "Basic",
-            //     link: "/forgot-password-3",
-            //     showSubRoute: false,
-            //   },
-            // ],
-          },
-          {
-            label: "Reset Password",
-            link: "/reset-password",
-            submenu: false,
-            showSubRoute: false,
-            // submenuItems: [
-            //   { label: "Cover", link: "/reset-password", showSubRoute: false },
-            //   {
-            //     label: "Illustration",
-            //     link: "/reset-password-2",
-            //     showSubRoute: false,
-            //   },
-            //   {
-            //     label: "Basic",
-            //     link: "/reset-password-3",
-            //     showSubRoute: false,
-            //   },
-            // ],
-          },
-          {
-            label: "Email Verification",
-            link: "/email-verification",
-            submenu: false,
-            showSubRoute: false,
-            // submenuItems: [
-            //   {
-            //     label: "Cover",
-            //     link: "/email-verification",
-            //     showSubRoute: false,
-            //   },
-            //   {
-            //     label: "Illustration",
-            //     link: "/email-verification-2",
-            //     showSubRoute: false,
-            //   },
-            //   {
-            //     label: "Basic",
-            //     link: "/email-verification-3",
-            //     showSubRoute: false,
-            //   },
-            // ],
-          },
-          // {
-          //   label: "2 Step Verification",
-          //   submenu: true,
-          //   showSubRoute: false,
-          //   submenuItems: [
-          //     {
-          //       label: "Cover",
-          //       link: "/two-step-verification",
-          //       showSubRoute: false,
-          //     },
-          //     {
-          //       label: "Illustration",
-          //       link: "/two-step-verification-2",
-          //       showSubRoute: false,
-          //     },
-          //     {
-          //       label: "Basic",
-          //       link: "/two-step-verification-3",
-          //       showSubRoute: false,
-          //     },
-          //   ],
-          // },
-          // { label: "Lock Screen", link: "/lock-screen", showSubRoute: false },
-        ],
-      },
-      // {
-      //   label: "Error Pages",
-      //   submenu: true,
-      //   showSubRoute: false,
-      //   icon: "file-x",
-      //   submenuItems: [
-      //     { label: "404 Error", link: "/error-404", showSubRoute: false },
-      //     { label: "500 Error", link: "/error-500", showSubRoute: false },
-      //   ],
-      // },
-      // {
-      //   label: "Places",
-      //   submenu: true,
-      //   showSubRoute: false,
-      //   icon: <Icon.Map />,
-      //   submenuItems: [
-      //     { label: "Countries", link: "countries",showSubRoute: false },
-      //     { label: "States", link: "states",showSubRoute: false }
-      //   ]
-      // },
-      // {
-      //   label: "Blank Page",
-      //   link: "/blank-page",
-      //   icon: "file",
-      //   showSubRoute: false,
-      // },
-      // {
-      //   label: "Pricing",
-      //   link: route.pricing,
-      //   icon: "currency-dollar",
-      //   showSubRoute: false,
-      // },
-      // {
-      //   label: "Coming Soon",
-      //   link: "/coming-soon",
-      //   icon: "send",
-      //   showSubRoute: false,
-      // },
-      // {
-      //   label: "Under Maintenance",
-      //   link: "/under-maintenance",
-      //   icon: "alert-triangle",
-      //   showSubRoute: false,
-      // },
-    ],
-  },
+  // {
+  //   label: "Pages",
+  //   submenuOpen: true,
+  //   showSubRoute: false,
+  //   submenuHdr: "Pages",
+  //   submenuItems: [
+  //     {
+  //       label: "Profile",
+  //       link: "/profile",
+  //       icon: "user-circle",
+  //       showSubRoute: false,
+  //     },
+  //     {
+  //       label: "Authentication",
+  //       submenu: true,
+  //       showSubRoute: false,
+  //       icon: "shield",
+  //       submenuItems: [
+  //         {
+  //           label: "Login",
+  //           link: "/signin",
+  //           submenu: false,
+  //           showSubRoute: false,
+  //           // // submenuItems: [
+  //           // //   { label: "Cover", link: "/signin", showSubRoute: false },
+  //           //   // { label: "Illustration", link: "/signin-2", showSubRoute: false },
+  //           //   // { label: "Basic", link: "/signin-3", showSubRoute: false },
+  //           // ],
+  //         },
+  //         {
+  //           label: "Register",
+  //           link: "/register",
+  //           submenu: false,
+  //           showSubRoute: false,
+  //           // submenuItems: [
+  //           //   { label: "Cover", link: "/register", showSubRoute: false },
+  //           //   {
+  //           //     label: "Illustration",
+  //           //     link: "/register-2",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           //   { label: "Basic", link: "/register-3", showSubRoute: false },
+  //           // ],
+  //         },
+  //         {
+  //           label: "Forgot Password",
+  //           link: "/forgot-password",
+  //           submenu: false,
+  //           showSubRoute: false,
+  //           // submenuItems: [
+  //           //   { label: "Cover", link: "/forgot-password", showSubRoute: false },
+  //           //   {
+  //           //     label: "Illustration",
+  //           //     link: "/forgot-password-2",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           //   {
+  //           //     label: "Basic",
+  //           //     link: "/forgot-password-3",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           // ],
+  //         },
+  //         {
+  //           label: "Reset Password",
+  //           link: "/reset-password",
+  //           submenu: false,
+  //           showSubRoute: false,
+  //           // submenuItems: [
+  //           //   { label: "Cover", link: "/reset-password", showSubRoute: false },
+  //           //   {
+  //           //     label: "Illustration",
+  //           //     link: "/reset-password-2",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           //   {
+  //           //     label: "Basic",
+  //           //     link: "/reset-password-3",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           // ],
+  //         },
+  //         {
+  //           label: "Email Verification",
+  //           link: "/email-verification",
+  //           submenu: false,
+  //           showSubRoute: false,
+  //           // submenuItems: [
+  //           //   {
+  //           //     label: "Cover",
+  //           //     link: "/email-verification",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           //   {
+  //           //     label: "Illustration",
+  //           //     link: "/email-verification-2",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           //   {
+  //           //     label: "Basic",
+  //           //     link: "/email-verification-3",
+  //           //     showSubRoute: false,
+  //           //   },
+  //           // ],
+  //         },
+  //         // {
+  //         //   label: "2 Step Verification",
+  //         //   submenu: true,
+  //         //   showSubRoute: false,
+  //         //   submenuItems: [
+  //         //     {
+  //         //       label: "Cover",
+  //         //       link: "/two-step-verification",
+  //         //       showSubRoute: false,
+  //         //     },
+  //         //     {
+  //         //       label: "Illustration",
+  //         //       link: "/two-step-verification-2",
+  //         //       showSubRoute: false,
+  //         //     },
+  //         //     {
+  //         //       label: "Basic",
+  //         //       link: "/two-step-verification-3",
+  //         //       showSubRoute: false,
+  //         //     },
+  //         //   ],
+  //         // },
+  //         // { label: "Lock Screen", link: "/lock-screen", showSubRoute: false },
+  //       ],
+  //     },
+  //     {
+  //       label: "Error Pages",
+  //       submenu: true,
+  //       showSubRoute: false,
+  //       icon: "file-x",
+  //       submenuItems: [
+  //         { label: "404 Error", link: "/error-404", showSubRoute: false },
+  //         { label: "500 Error", link: "/error-500", showSubRoute: false },
+  //       ],
+  //     },
+  //     {
+  //       label: "Places",
+  //       submenu: true,
+  //       showSubRoute: false,
+  //       icon: <Icon.Map />,
+  //       submenuItems: [
+  //         { label: "Countries", link: "countries",showSubRoute: false },
+  //         { label: "States", link: "states",showSubRoute: false }
+  //       ]
+  //     },
+  //     {
+  //       label: "Blank Page",
+  //       link: "/blank-page",
+  //       icon: "file",
+  //       showSubRoute: false,
+  //     },
+  //     {
+  //       label: "Pricing",
+  //       link: route.pricing,
+  //       icon: "currency-dollar",
+  //       showSubRoute: false,
+  //     },
+  //     {
+  //       label: "Coming Soon",
+  //       link: "/coming-soon",
+  //       icon: "send",
+  //       showSubRoute: false,
+  //     },
+  //     {
+  //       label: "Under Maintenance",
+  //       link: "/under-maintenance",
+  //       icon: "alert-triangle",
+  //       showSubRoute: false,
+  //     },
+  //   ],
+  // },
 
   {
     label: "Settings",
@@ -1029,7 +1035,7 @@ export const SidebarData = [
         submenuItems: [
           {
             label: "Activation",
-            link: "#",
+            link: "/activations",
             showSubRoute: false,
             // submenu: true,
             // submenuItems: [
@@ -1037,13 +1043,16 @@ export const SidebarData = [
             //   { label: "Invoice Template", link: "/invoice-template" },
             // ],
           },
-          { label: "Commission", link: "#", showSubRoute: false },
-          { label: "Ride Settings", link: "#", showSubRoute: false },
+          { label: "Commission", link: "/commission", showSubRoute: false },
+          { label: "Ride Settings", link: "/ridesettings", showSubRoute: false },
           {
             label: "Wallet Settings",
-            link: "#",
+            link: "/walletsettings",
             showSubRoute: false,
           },
+          { label: "Refferal Settings", link: "/ridesettings", showSubRoute: false },
+          { label: "Location Settings", link: "/ridesettings", showSubRoute: false },
+          { label: "App Configuration", link: "#", showSubRoute: false },
         ],
       },
       // {

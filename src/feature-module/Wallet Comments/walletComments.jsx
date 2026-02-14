@@ -190,23 +190,23 @@ export default function WalletComments() {
 
               {/* Bulk */}
               <div className="dropdown">
-                <Link
-                  to="#"
+                <button
+                  type="button"
                   className="btn btn-white dropdown-toggle"
                   data-bs-toggle="dropdown"
                 >
                   Bulk Actions
-                </Link>
+                </button>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link
+                    <button
                       to="#"
                       className="dropdown-item text-danger"
                       onClick={handleBulkTrash}
                     >
                       <i className="ti ti-trash me-2" />
                       Move to Trash
-                    </Link>
+                    </button>
                   </li>
                 </ul>
               </div>

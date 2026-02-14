@@ -148,9 +148,9 @@ export default function Riderwallet() {
                     style={{ maxWidth: "260px" }}
                   />
 
-                  <button className="btn btn-primary">Credit</button>
+                  <button className="btn btn-primary"><i className="ti ti-download me-1" />Credit</button>
 
-                  <button className="btn btn-danger">Debit</button>
+                  <button className="btn btn-danger"><i className="ti ti-upload me-1" />Debit</button>
                 </div>
               </div>
             </div>

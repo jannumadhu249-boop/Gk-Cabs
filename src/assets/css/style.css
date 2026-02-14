@@ -6832,8 +6832,8 @@ hr.text-danger {
   border: 1px solid #e6eaed;
 }
 .form-check-input:checked {
-  background-color: #0984E3;
-  border-color: #0984E3;
+  background-color: #03fc45;
+  border-color: #03fc45;
 }
 .form-check-input.form-checked-outline:checked {
   background-color: transparent;
@@ -12753,8 +12753,8 @@ table.dataTable {
   margin-left: 25%;
 }
 .card .card-body .payroll-info .status-updates .form-check-input:checked {
-  background-color: #0984E3;
-  border-color: #0984E3;
+  background-color: #03fc45;
+  border-color: #03fc45;
 }
 .card .card-body .payroll-info .status-updates .form-check-input:focus {
   box-shadow: none;
@@ -32209,8 +32209,8 @@ body.data-layout-transparent .page-wrapper .head-icons {
   color: #0984E3;
 }
 [data-color="primary"] .form-check-input:checked {
-  background-color: #0984E3;
-  border-color: #0984E3;
+  background-color: #03fc45;
+  border-color: #03fc45;
 }
 [data-color="primary"] .sidebar-contact .toggle-theme {
   background-color: #0984E3;
@@ -32528,8 +32528,8 @@ body.data-layout-transparent .page-wrapper .head-icons {
   color: #009688;
 }
 [data-color="brightblue"] .form-check-input:checked {
-  background-color: #009688;
-  border-color: #009688;
+  background-color: #03fc45;
+  border-color: #03fc45;
 }
 [data-color="brightblue"] .sidebar-contact .toggle-theme {
   background-color: #009688;
@@ -33456,8 +33456,8 @@ body.data-layout-transparent .page-wrapper .head-icons {
   color: #0984e3;
 }
 [data-color="magenta"] .form-check-input:checked {
-  background-color: #0984e3;
-  border-color: #0984e3;
+  background-color: #00992e !important;
+  border-color: #00992e !important;
 }
 [data-color="magenta"] .sidebar-contact .toggle-theme {
   background-color: #0984e3;

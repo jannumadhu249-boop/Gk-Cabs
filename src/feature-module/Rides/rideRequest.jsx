@@ -145,7 +145,7 @@ export default function RideRequests() {
           <div>
             <h4>Ride Requsts</h4>
           </div>
-          <Link to="/export" className="btn btn-outline-success"><i className="ti ti-circle-plus me-2" />Add New</Link>
+          {/* <Link to="#" className="btn btn-outline-success"><i className="ti ti-circle-plus me-2" />Add New</Link> */}
         </div>
 
         <div className="card table-list-card">

@@ -1,0 +1,1 @@
+import{r as l,j as e,bZ as o}from"./index-Vm1r3IhZ.js";const u=({selectedTime:r,onChange:t,className:a="datetimepicker",minTime:n,disabled:s=!1})=>{const m=l.useRef(null);return e.jsx(e.Fragment,{children:e.jsx(o,{ref:m,className:a,placeholder:"Select time",value:r,onChange:i=>t(i.value),timeOnly:!0,disabled:s,minDate:n})})};export{u as C};

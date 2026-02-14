@@ -154,7 +154,7 @@ export default function VehicleType() {
           <div>
             <h4>Vehicle Types</h4>
           </div>
-          <Link to="/" className="btn btn-outline-success">
+          <Link to="#" className="btn btn-outline-success">
             <i className="ti ti-circle-plus me-1" />
             Add New Vehicle
           </Link>

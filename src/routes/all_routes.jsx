@@ -2,6 +2,10 @@
 export const all_routes = {
   newdashboard: "/index",
   dashboard: "/admin-dashboard",
+
+
+
+
   zones: "/zones",
   Addzones: "/Addzones",
   editzones: "/editZones",
@@ -9,8 +13,12 @@ export const all_routes = {
   Addairportzones: "/Addairportzones",
   editairportzones: "/editairportZones",
   Peakzones: "/Peakzones",
+  addpeakzones: "/addpeakZones",
   Allriders: "/Riders",
   riderwallet: "/riderWallet",
+  viewriderdetails: "/viewrider",
+  viewridedetails: "/rideDetails",
+  viewdriverdetails: "/viewdriverDetails",
   Verifieddriver: "/verifiedDriver",
   UnverifiedDriver: "/unverifiedDriver",
   driverRules: "/driverRules",
@@ -50,6 +58,29 @@ export const all_routes = {
   preferences: "/preference",
   addpreference: "/addPreference",
   changepassword: "/changePassword",
+  surgeprices: "/surgePrices",
+  editsurgeprice: "/editSurgePrice",
+  addsurgeprice: "/addSurgePrice",
+  activations: "/activations",
+  commission: "/commission",
+  refferal: "/refferalsettings",
+  ridesettings: "/ridesettings",
+  walletsettings: "/walletsettings",
+  locationsettings: "/loactionsettings",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   productlist: "/product-list",
   addproduct: "/add-product",
   salesdashboard: "/sales-dashboard",

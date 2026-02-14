@@ -20,6 +20,7 @@ export const CouponData = [
   amount: "550",
   name:"Ride",
   service: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "2",
@@ -40,6 +41,7 @@ export const CouponData = [
   amount: "550",
   name:"Ride",
   service: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "3",
@@ -60,6 +62,7 @@ export const CouponData = [
   amount: "550",
   name:"Ride",
   service: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "4",
@@ -80,6 +83,7 @@ export const CouponData = [
   amount: "550",
   name:"Ride",
   service: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "5",
@@ -100,6 +104,7 @@ export const CouponData = [
   amount: "550",
   name:"Ride",
   service: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "6",
@@ -120,6 +125,7 @@ export const CouponData = [
   amount: "550",
   name:"Rental",
   serivce: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "7",
@@ -143,6 +149,7 @@ export const CouponData = [
   amount: "550",
   name:"Package",
   serivce: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "8",
@@ -166,6 +173,7 @@ export const CouponData = [
   amount: "550",
   name:"Schedule",
   serivce: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "9",
@@ -189,6 +197,7 @@ export const CouponData = [
   amount: "550",
   name:"Outstation",
   serivce: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "10",
@@ -212,6 +221,7 @@ export const CouponData = [
   amount: "550",
   name:"Intercity",
   serivce: "cab",
+  phonenumber: "1234567980",
 },
 {
   id: "11",
@@ -233,6 +243,7 @@ export const CouponData = [
   fleetcommission: "10.00",
   expiredat: "2025-01-25 06:50:25",
   amount: "550",
+  phonenumber: "1234567980",
 },
 {
   id: "12",
@@ -254,6 +265,7 @@ export const CouponData = [
   fleetcommission: "10.00",
   expiredat: "2025-01-25 06:50:25",
   amount: "550",
+  phonenumber: "1234567980",
 },
 {
   id: "13",
@@ -269,6 +281,7 @@ export const CouponData = [
   Limit: "02",
   Valid: "28 Nov 2024",
   amount: "550",
+  phonenumber: "1234567980",
 },
 {
   id: "15",
@@ -284,6 +297,7 @@ export const CouponData = [
   Limit: "04",
   Valid: "18 Nov 2024",
   amount: "550",
+  phonenumber: "1234567980",
 },
 {
   id: "16",
@@ -299,6 +313,7 @@ export const CouponData = [
   Limit: "03",
   Valid: "06 Nov 2024",
   amount: "550",
+  phonenumber: "1234567980",
 },
 {
   id: "17",
@@ -314,4 +329,5 @@ export const CouponData = [
   Limit: "01",
   Valid: "31 Oct 2024",
   amount: "550",
+  phonenumber: "1234567980",
 }];

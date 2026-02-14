@@ -11,7 +11,7 @@ import { Search } from "react-feather";
 export default function Verifieddriver() {
   /* ===================== STATE ===================== */
   const [searchQuery, setSearchQuery] = useState("");
-  const [rows, setRows] = useState(10);
+  const [rows, setRows] = useState(5);
   const [tableData, setTableData] = useState(CouponData);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -92,12 +92,12 @@ export default function Verifieddriver() {
       body: (_row, options) => options.rowIndex + 1,
     },
     {
-      header: "ID",
-      field: "id",
+      header: "Name",
+      field: "name",
     },
     {
-      header: "Name",
-      field: "Name",
+      header: "Phone Number",
+      field: "phonenumber",
     },
     {
       header: "Email",
@@ -151,9 +151,10 @@ export default function Verifieddriver() {
         <div className="edit-delete-action">
           <Link
             className="me-2 p-2"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#riderdetails-units"
+            to="/viewdriverDetails"
+            title="Driver Details"
+            // data-bs-toggle="modal"
+            // data-bs-target="#riderdetails-units"
           >
             <i className="ti ti-eye" />
           </Link>
@@ -176,8 +177,8 @@ export default function Verifieddriver() {
           <Link
             className="p-2"
             to="/driverDocument"
-            data-bs-toggle="modal"
-            data-bs-target="#file-modal"
+            // data-bs-toggle="modal"
+            // data-bs-target="#file-modal"
           >
             <i className="ti ti-file" />
           </Link>

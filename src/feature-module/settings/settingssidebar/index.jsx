@@ -290,9 +290,9 @@ const SettingsSideBar = (props) => {
                         
                         <li>
                           <Link
-                            to={route.invoicesettings}
+                            to={route.activations}
                             className={
-                            location.pathname === route.invoicesettings ?
+                            location.pathname === route.activations ?
                             "active" :
                             ""
                             }>
@@ -302,9 +302,9 @@ const SettingsSideBar = (props) => {
                         </li>
                         <li>
                           <Link
-                            to={route.invoicetemplate}
+                            to={route.commission}
                             className={
-                            location.pathname === route.invoicetemplate ?
+                            location.pathname === route.commission ?
                             "active" :
                             ""
                             }>
@@ -314,9 +314,9 @@ const SettingsSideBar = (props) => {
                         </li>
                         <li>
                           <Link
-                            to={route.printersettings}
+                            to={route.ridesettings}
                             className={
-                            location.pathname === route.printersettings ?
+                            location.pathname === route.ridesettings ?
                             "active" :
                             ""
                             }>
@@ -326,9 +326,9 @@ const SettingsSideBar = (props) => {
                         </li>
                         <li>
                           <Link
-                            to={route.possettings}
+                            to={route.walletsettings}
                             className={
-                            location.pathname === route.possettings ?
+                            location.pathname === route.walletsettings ?
                             "active" :
                             ""
                             }>
@@ -338,9 +338,9 @@ const SettingsSideBar = (props) => {
                         </li>
                         <li>
                           <Link
-                            to={route.signatures}
+                            to={route.refferal}
                             className={
-                            location.pathname === route.signatures ?
+                            location.pathname === route.refferal ?
                             "active" :
                             ""
                             }>
@@ -350,9 +350,9 @@ const SettingsSideBar = (props) => {
                         </li>
                         <li>
                           <Link
-                            to={route.customfields}
+                            to={route.locationsettings}
                             className={
-                            location.pathname === route.customfields ?
+                            location.pathname === route.locationsettings ?
                             "active" :
                             ""
                             }>

@@ -85,13 +85,17 @@ export default function Riders() {
       header: "Sl.No",
       body: (_row, options) => options.rowIndex + 1,
     },
-    {
-      header: "ID",
-      field: "id",
-    },
+    // {
+    //   header: "ID",
+    //   field: "id",
+    // },
     {
       header: "Name",
       field: "Name",
+    },
+    {
+      header: "Phone Number",
+      field: "phonenumber",
     },
     {
       header: "Email",
@@ -113,6 +117,10 @@ export default function Riders() {
       ),
     },
     {
+      header: "OTP",
+      field: "otp",
+    },
+    {
       header: "Created Date",
       body: (row) =>
         row?.date
@@ -130,13 +138,14 @@ export default function Riders() {
         <div className="edit-delete-action">
           <Link
             className="me-2 p-2"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#riderdetails-units"
+            to="/viewrider"
+            title="View Details"
+            // data-bs-toggle="modal"
+            // data-bs-target="#riderdetails-units"
           >
             <i className="ti ti-eye" />
           </Link>
-          <Link
+          {/* <Link
             className="me-2 p-2"
             to="#"
             data-bs-toggle="modal"
@@ -151,7 +160,7 @@ export default function Riders() {
             data-bs-target="#delete-modal"
           >
             <i className="ti ti-trash" />
-          </Link>
+          </Link> */}
         </div>
       ),
     },

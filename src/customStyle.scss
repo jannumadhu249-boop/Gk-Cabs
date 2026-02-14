@@ -2549,49 +2549,89 @@ div.p-datepicker table td.p-datepicker-today > span.p-highlight {
 }
 
 
+// .revenue-widget {
+//   position: relative;
+//   overflow: hidden;
+//   border-radius: 16px !important;
+// }
+
+// /* Right curved background */
+// .revenue-widget::after {
+//   content: "";
+//   position: absolute;
+//   top: -30px;
+//   right: -120px;
+//   width: 180px;
+//   height: 200px;
+//   border-radius: 100px;
+//   background: rgba(40, 147, 80, 0.20) !important;
+//   z-index: 0;
+// }
+
+// /* Ensure content stays above curve */
+// .revenue-widget .card-body {
+//   position: relative;
+//   z-index: 1;
+// }
+
+
+// .revenue-widget .bg-success ~ ::after {
+//   background: rgba(40, 167, 69, 0.12);
+// }
+
+// .revenue-widget .bg-warning ~ ::after {
+//   background: rgba(255, 193, 7, 0.18);
+// }
+
+// .revenue-widget .bg-info ~ ::after {
+//   background: rgba(13, 202, 240, 0.18);
+// }
+
+
+
 .revenue-widget {
   position: relative;
   overflow: hidden;
   border-radius: 16px !important;
 }
 
-/* Right curved background */
-.revenue-widget::after {
+/* FIRST (Outer Light Layer) */
+.revenue-widget::before {
   content: "";
   position: absolute;
-  top: -30px;
-  right: -120px;
-  width: 180px;
-  height: 200px;
-  border-radius: 100px;
-  background: rgba(40, 147, 80, 0.20) !important;
+  top: -20px;
+  right: -140px;
+  width: 220px;
+  height: 240px;
+  border-radius: 120px;
+  background: rgba(40, 147, 80, 0.15);
   z-index: 0;
 }
 
-/* Ensure content stays above curve */
+/* SECOND (Inner Darker Layer) */
+.revenue-widget::after {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -100px;
+  width: 150px;
+  height: 200px;
+  border-radius: 100px;
+  background: rgba(40, 147, 80, 0.25);
+  z-index: 0;
+}
+
+/* Keep content above layers */
 .revenue-widget .card-body {
   position: relative;
-  z-index: 1;
-}
-
-
-.revenue-widget .bg-success ~ ::after {
-  background: rgba(40, 167, 69, 0.12);
-}
-
-.revenue-widget .bg-warning ~ ::after {
-  background: rgba(255, 193, 7, 0.18);
-}
-
-.revenue-widget .bg-info ~ ::after {
-  background: rgba(13, 202, 240, 0.18);
+  z-index: 2;
 }
 
 
 
 .form-switch .form-check-input.bg-danger {
-  background-color: #dc3545 ;
-  border-color: #dc3545;
+  background-color: #00992e;
+  border-color: #00992e;
 }
 
 .form-switch .form-check-input.bg-success {
@@ -2609,4 +2649,9 @@ div.p-datepicker table td.p-datepicker-today > span.p-highlight {
 
 .header .header-left .logo img {
   width: 100px !important;
+}
+
+[data-color="magenta"] .form-check-input:checked {
+  background-color: #00992e !important;
+  border-color: #00992e !important;
 }

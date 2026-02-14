@@ -176,7 +176,7 @@ export default function AllRides() {
       header: "Actions",
       body: () => (
         <div className="view-action">
-          <Link className="me-2 p-2" to="#" title="Ride Details">
+          <Link className="me-2 p-2" to="/rideDetails" title="Ride Details">
             <i className="ti ti-eye" />
           </Link>
         </div>
