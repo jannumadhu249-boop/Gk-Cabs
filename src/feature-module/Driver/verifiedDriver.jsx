@@ -160,9 +160,10 @@ export default function Verifieddriver() {
           </Link>
           <Link
             className="me-2 p-2"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#edit-units"
+            to="/editdriver"
+            title="Edit Driver"
+            // data-bs-toggle="modal"
+            // data-bs-target="#edit-units"
           >
             <i className="ti ti-edit" />
           </Link>

@@ -86,13 +86,13 @@ export default function VehicleZone() {
       header: "Zone Name",
       field: "zonename",
     },
+    // {
+    //   header: "Currency Code",
+    //   field: "currencycode",
+    // },
     {
-      header: "Currency Code",
-      field: "currencycode",
-    },
-    {
-      header: "Distance Type",
-      field: "distancetype",
+      header: "Priority",
+      field: "priority",
     },
     {
       header: "Actions",

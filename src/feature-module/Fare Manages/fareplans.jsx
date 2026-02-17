@@ -6,7 +6,7 @@ import { CouponData } from "../../core/json/Coupons";
 import CommonFooter from "../../components/footer/commonFooter";
 import SearchFromApi from "../../components/data-table/search";
 
-export default function WalletComments() {
+export default function FarePlans() {
   /* ===================== STATE ===================== */
   const [rows, setRows] = useState(5);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -33,18 +33,18 @@ export default function WalletComments() {
   };
 
   /* ===================== STATUS ACTIONS ===================== */
-  const approveDocument = (id) => {
+  const activeVehicle = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Approved" } : item
+        item.id === id ? { ...item, Status: "Active" } : item
       )
     );
   };
 
-  const rejectDocument = (id) => {
+  const inactiveVehicle = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Rejected" } : item
+        item.id === id ? { ...item, Status: "Inactive" } : item
       )
     );
   };
@@ -96,29 +96,37 @@ export default function WalletComments() {
     //   field: "id",
     // },
     {
-      header: "Name",
+      header: "Service Name",
       field: "name",
     },
+    {
+      header: "Plan Name",
+      field: "planname",
+    },
+    // {
+    //   header: "Down Grade",
+    //   field: "downgrade",
+    // },
     {
       header: "Priority",
       field: "priority",
     },  
-    // {
-    //   header: "Status",
-    //   body: (row) => {
-    //     let badgeClass = "bg-warning text-dark";
-    //     if (row.Status === "Approved") badgeClass = "bg-success";
-    //     if (row.Status === "Rejected") badgeClass = "bg-danger";
+    {
+      header: "Status",
+      body: (row) => {
+        let badgeClass = "bg-warning text-dark";
+        if (row.Status === "Active") badgeClass = "bg-success";
+        if (row.Status === "Inactive") badgeClass = "bg-danger";
 
-    //     return <span className={`badge ${badgeClass}`}>{row.Status}</span>;
-    //   },
-    // },
+        return <span className={`badge ${badgeClass}`}>{row.Status}</span>;
+      },
+    },
     {
       header: "Actions",
       body: (row) => (
         <div className="edit-delete-action d-flex align-items-center">
           {/* VIEW */}
-          <Link className="me-2 p-2" to="/EditComments" title="Edit">
+          <Link className="me-2 p-2" to="/editfareplan" title="Edit">
             <i className="ti ti-edit" />
           </Link>
 {/* 
@@ -127,24 +135,24 @@ export default function WalletComments() {
           </Link> */}
 
           {/* APPROVE */}
-          {/* <button
+          <button
             className="btn p-2 text-success"
-            title="Approve"
-            onClick={() => approveDocument(row.id)}
-            disabled={row.Status === "Approved"}
+            title="Active"
+            onClick={() => activeVehicle(row.id)}
+            disabled={row.Status === "Active"}
           >
             <i className="ti ti-check" />
-          </button> */}
+          </button>
 
           {/* REJECT */}
-          {/* <button
+          <button
             className="btn p-2 text-danger"
-            title="Reject"
-            onClick={() => rejectDocument(row.id)}
-            disabled={row.Status === "Rejected"}
+            title="Inactive"
+            onClick={() => inactiveVehicle(row.id)}
+            disabled={row.Status === "Inactive"}
           >
             <i className="ti ti-x" />
-          </button> */}
+          </button>
         </div>
       ),
     },
@@ -155,10 +163,10 @@ export default function WalletComments() {
     <div className="page-wrapper">
       <div className="content">
         <div className="page-header d-flex justify-content-between align-items-center">
-          <h4>Wallet Comments</h4>
-          <Link to="/addComments" className="btn btn-outline-success">
+          <h4>Fare Plan List</h4>
+          <Link to="/addfareplan" className="btn btn-outline-success">
           <i className="ti ti-circle-plus me-1"/>
-          Add Comments</Link>
+          Add New Plan </Link>
         </div>
 
         <div className="card table-list-card">
@@ -190,23 +198,23 @@ export default function WalletComments() {
 
               {/* Bulk */}
               <div className="dropdown">
-                <button
-                  type="button"
+                <Link
+                  to="#"
                   className="btn btn-white dropdown-toggle"
                   data-bs-toggle="dropdown"
                 >
                   Bulk Actions
-                </button>
+                </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <button
+                    <Link
                       to="#"
                       className="dropdown-item text-danger"
                       onClick={handleBulkTrash}
                     >
                       <i className="ti ti-trash me-2" />
                       Move to Trash
-                    </button>
+                    </Link>
                   </li>
                 </ul>
               </div>

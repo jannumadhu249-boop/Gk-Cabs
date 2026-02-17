@@ -3,9 +3,11 @@ import CommonFooter from "../../components/footer/commonFooter";
 
 const SetWorldPrice = () => {
   const [formData, setFormData] = useState({
+    farePlan: "",
     baseFare: "",
     baseDistance: "",
     perDistance: "",
+    minimumHrs: "",
     perMinute: "",
     waitingCharge: "",
     freeWaitTime: "",
@@ -26,7 +28,7 @@ const SetWorldPrice = () => {
     newPreferenceRate: "",
   });
 
-    const [preferences, setPreferences] = useState([
+  const [preferences, setPreferences] = useState([
     { id: 1, name: "Pet Allowed", price: "" },
     { id: 2, name: "Extra Luggage Space", price: "" },
     { id: 3, name: "Child Seat", price: "" },
@@ -38,10 +40,10 @@ const SetWorldPrice = () => {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: type === "checkbox" ? checked : value,
-    });
+    }));
   };
 
   const updatePreferencePrice = (id, value) => {
@@ -80,17 +82,37 @@ const SetWorldPrice = () => {
       <div className="content">
         <div className="card">
           <div className="card-header">
-            <h4>Set Price for World</h4>
+            <h4>Set Fare Plan Price</h4>
           </div>
 
           <form onSubmit={handleSubmit}>
             <div className="card-body">
               <div className="row g-4">
                 {/* ================= BASIC PRICING ================= */}
+
+                <div className="col-md-4">
+                  <label className="form-label">Fare Plan</label>
+                  <div className="input-group">
+                    <select
+                      type="select"
+                      className="form-select"
+                      name="farePlan"
+                      value={formData.farePlan}
+                      onChange={handleChange}
+                    >
+                      <option>Select Plan</option>
+                      <option value="city">City Ride</option>
+                      <option value="outstation">Outstation Oneway </option>
+                      <option value="round">Round Trip</option>
+                      <option value="rental">Rental Hourly Package</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div className="col-md-4">
                   <label className="form-label">Base Fare Charge *</label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -110,12 +132,27 @@ const SetWorldPrice = () => {
                   />
                 </div>
 
+                {/* Show only for Rental Hourly Package */}
+                {formData.farePlan === "rental" && (
+                  <div className="col-md-4">
+                    <label className="form-label">Minimum Hours *</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="minimumHrs"
+                      value={formData.minimumHrs}
+                      onChange={handleChange}
+                      placeholder="Enter Minimum Hours"
+                    />
+                  </div>
+                )}
+
                 <div className="col-md-4">
                   <label className="form-label">
                     Per Distance Charge (Km) *
                   </label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -128,7 +165,7 @@ const SetWorldPrice = () => {
                 <div className="col-md-4">
                   <label className="form-label">Per Minute Charge *</label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -141,7 +178,7 @@ const SetWorldPrice = () => {
                 <div className="col-md-4">
                   <label className="form-label">Waiting Charge</label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -179,7 +216,7 @@ const SetWorldPrice = () => {
                     Cancellation Charge for Rider
                   </label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -194,7 +231,7 @@ const SetWorldPrice = () => {
                     Cancellation Charge for Driver
                   </label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -212,6 +249,7 @@ const SetWorldPrice = () => {
                     name="commissionType"
                     onChange={handleChange}
                   >
+                    <option value="select">Select</option>
                     <option value="fixed">Fixed</option>
                     <option value="percentage">Percentage</option>
                   </select>
@@ -220,7 +258,7 @@ const SetWorldPrice = () => {
                 <div className="col-md-4">
                   <label className="form-label">Commission Rate *</label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"
@@ -237,6 +275,7 @@ const SetWorldPrice = () => {
                     name="chargeGoesTo"
                     onChange={handleChange}
                   >
+                    <option value="select">Select</option>
                     <option value="admin">Admin</option>
                     <option value="driver">Driver</option>
                     <option value="company">Company</option>
@@ -293,7 +332,7 @@ const SetWorldPrice = () => {
                   <div className="col-md-4">
                     <label className="form-label">Airport Charge Rate</label>
                     <div className="input-group">
-                      <span className="input-group-text">$</span>
+                      <span className="input-group-text">₹</span>
                       <input
                         type="number"
                         className="form-control"
@@ -335,7 +374,7 @@ const SetWorldPrice = () => {
                       <div className="col-md-4">
                         <label className="form-label">Preference Price</label>
                         <div className="input-group">
-                          <span className="input-group-text">$</span>
+                          <span className="input-group-text">₹</span>
                           <input
                             type="number"
                             className="form-control"
@@ -376,7 +415,7 @@ const SetWorldPrice = () => {
                 <div className="col-md-4">
                   <label className="form-label">Preference Rate</label>
                   <div className="input-group">
-                    <span className="input-group-text">$</span>
+                    <span className="input-group-text">₹</span>
                     <input
                       type="number"
                       className="form-control"

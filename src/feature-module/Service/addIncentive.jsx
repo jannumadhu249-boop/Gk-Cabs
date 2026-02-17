@@ -3,6 +3,7 @@ import { useState } from "react";
 const AddIncentivesModal = () => {
   const [period, setPeriod] = useState("");
 
+
   const [levels, setLevels] = useState([
     { id: 1, target: 1, amount: 5 },
     { id: 2, target: 2, amount: 10 },
@@ -45,6 +46,7 @@ const AddIncentivesModal = () => {
     });
   };
 
+
   return (
     <div
       className="modal fade show d-block"
@@ -84,7 +86,7 @@ const AddIncentivesModal = () => {
               <div className="col-md-6">
                 <label className="form-label fw-medium">Currency</label>
                 <div className="input-group">
-                  <span className="input-group-text">$</span>
+                  <span className="input-group-text">₹</span>
                   <input
                     type="text"
                     className="form-control"
@@ -129,7 +131,7 @@ const AddIncentivesModal = () => {
                       Incentive Amount <span className="text-danger">*</span>
                     </label>
                     <div className="input-group">
-                      <span className="input-group-text">$</span>
+                      <span className="input-group-text">₹</span>
                       <input
                         type="number"
                         className="form-control"
@@ -167,7 +169,8 @@ const AddIncentivesModal = () => {
 
           {/* ================= FOOTER ================= */}
           <div className="modal-footer">
-            <button className="btn btn-outline-secondary me-2 p-2">
+            <button className="btn btn-outline-secondary me-2 p-2"
+            data-bs-dismiss="modal">
               Cancel
             </button>
             <button className="btn btn-primary me-2 p-2" onClick={handleSubmit}>

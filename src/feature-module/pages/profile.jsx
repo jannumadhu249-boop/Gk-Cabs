@@ -6,10 +6,17 @@ import { user49 } from "../../utils/imagepath";
 
 const Profile = () => {
   const [isPasswordVisible, setPasswordVisible] = useState(false);
+  const[loading,setLoading] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefalut();
+    setLoading(true);
+    setError("");
+  }
   return (
     <div className="page-wrapper">
       <div className="content">

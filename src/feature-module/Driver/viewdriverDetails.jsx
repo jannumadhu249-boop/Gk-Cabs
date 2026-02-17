@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { CouponData } from "../../core/json/Coupons";
 import PrimeDataTable from "../../components/data-table";
+import CommonFooter from "../../components/footer/commonFooter";
 
 const ViewDriverDetails = () => {
   const [tableData, setTableData] = useState(
@@ -74,7 +75,7 @@ const ViewDriverDetails = () => {
           <div className="col-lg-6">
             <div className="card shadow-sm border-0 h-100">
               <div className="card-body">
-                <h5 className="fw-bold mb-4">Personal Information</h5>
+                <h5 className="fw-bold mb-4">Driver Information</h5>
 
                 <div
                   className="d-flex align-items-center mb-4"
@@ -187,7 +188,105 @@ const ViewDriverDetails = () => {
             />
           </div>
         </div>
+
+        <div className="row g-4">
+          {/* Vehicle Information */}
+          <div className="col-lg-6">
+            <div className="card shadow-sm border-0 h-100">
+              <div className="card-body">
+                <h5 className="fw-bold mb-4">Vehicle Information</h5>
+
+                <div className="d-flex align-items-center mb-4"></div>
+
+                <div className="row">
+                  <div className="col-6">
+                    <p>
+                      <strong>Model :</strong> Tata Ace
+                    </p>
+                    <p>
+                      <strong>Vehicle Type :</strong> Mini Truck
+                    </p>
+                  </div>
+                  <div className="col-6 border-start">
+                    <p>
+                      <strong>Color :</strong> Yellow
+                    </p>
+                    <p>
+                      <strong>Seats :</strong> 2
+                    </p>
+                    <p>
+                      <strong>Plate Number :</strong> OH14XY1234
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Driver Location */}
+          
+          <div className="col-lg-6">
+            <div className="card shadow-sm border-0 h-100">
+              <div className="card-body">
+                {/* Header Section */}
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <h5 className="fw-bold mb-0">Driver Location</h5>
+                </div>
+
+                <div className="table-responsive">
+                  <iframe
+                    class="embed-map-frame"
+                    frameborder="0"
+                    scrolling="no"
+                    marginheight="0"
+                    marginwidth="0"
+                    width={550}
+                    height={300}
+                    src="https://maps.google.com/maps?width=600&height=400&hl=en&q=Hyderabad&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Rider Reviews */}
+
+          <div className="col-lg-6">
+            <div className="card shadow-sm border-0 h-100">
+              <div className="card-body">
+                {/* Header Section */}
+                <div className="d-flex justify-content-between align-items-center mb-4">
+                  <h5 className="fw-bold mb-0">Rider Reviews</h5>
+
+                  <Link to="#" className="btn btn-success btn-sm">
+                    View All
+                  </Link>
+                </div>
+
+                <div className="table-responsive">
+                  <table className="table align-middle">
+                    <thead className="table-light">
+                      <tr>
+                        <th>Rider</th>
+                        <th>Rating</th>
+                        <th>Message</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td colSpan="3" className="text-center text-muted py-5">
+                          No reviews available
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <CommonFooter />
     </div>
   );
 };

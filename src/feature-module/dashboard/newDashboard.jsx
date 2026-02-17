@@ -39,7 +39,7 @@ const NewDashboard = () => {
       title: "All Rides",
       iconClass: "fa-solid fa-car fs-18",
       iconBg: "bg-cyan-transparent text-cyan",
-      link: "profit-and-loss.html",
+      link: "/allRides",
       showStats: false,
     },
     {
@@ -47,7 +47,7 @@ const NewDashboard = () => {
       title: "Scheduled Rides",
       iconClass: "fa-solid fa-calendar-check fs-18",
       iconBg: "bg-teal-transparent text-teal",
-      link: route.invoicereport,
+      link: route.scheduledrides,
       showStats: false,
     },
     {
@@ -55,7 +55,7 @@ const NewDashboard = () => {
       title: "Accepted Rides",
       iconClass: "fa-solid fa-thumbs-up fs-18",
       iconBg: "bg-orange-transparent text-orange",
-      link: route.expenselist,
+      link: route.accpetedrides,
       showStats: false,
     },
     {
@@ -71,7 +71,7 @@ const NewDashboard = () => {
       title: "Client Location",
       iconClass: "fa-solid fa-location-dot fs-18",
       iconBg: "bg-cyan-transparent text-cyan",
-      link: "profit-and-loss.html",
+      link: route,
       showStats: false,
     },
     {
@@ -79,7 +79,7 @@ const NewDashboard = () => {
       title: "Start Rides",
       iconClass: "fa-solid fa-play-circle fs-18",
       iconBg: "bg-teal-transparent text-teal",
-      link: route.invoicereport,
+      link: route.startedrides,
       showStats: false,
     },
     {
@@ -87,7 +87,7 @@ const NewDashboard = () => {
       title: "Cancelled Rides",
       iconClass: "fa-solid fa-xmark-circle fs-18",
       iconBg: "bg-orange-transparent text-orange",
-      link: route.expenselist,
+      link: route.cancelledrides,
       showStats: false,
     },
     {
@@ -95,7 +95,7 @@ const NewDashboard = () => {
       title: "Completed Rides",
       iconClass: "fa-solid fa-circle-check fs-18",
       iconBg: "bg-indigo-transparent text-indigo",
-      link: route.salesreport,
+      link: route.completedrides,
       showStats: false,
     },
     {
@@ -103,7 +103,7 @@ const NewDashboard = () => {
       title: "Cancelled Rides(Passenger)",
       iconClass: "fa-solid fa-user-xmark fs-18",
       iconBg: "bg-cyan-transparent text-cyan",
-      link: "profit-and-loss.html",
+      link: route,
       showStats: false,
     },
     {
@@ -111,7 +111,7 @@ const NewDashboard = () => {
       title: "Cancelled Rides(Driver)",
       iconClass: "fa-solid fa-car-burst fs-18",
       iconBg: "bg-teal-transparent text-teal",
-      link: route.invoicereport,
+      link: route,
       showStats: false,
     },
     {
@@ -119,7 +119,7 @@ const NewDashboard = () => {
       title: "User Wallet Report",
       iconClass: "fa-solid fa-wallet fs-18",
       iconBg: "bg-orange-transparent text-orange",
-      link: route.expenselist,
+      link: route.riderwallet,
       showStats: false,
     },
     {
@@ -127,7 +127,7 @@ const NewDashboard = () => {
       title: "Driver Wallet Report",
       iconClass: "fa-solid fa-wallet fs-18",
       iconBg: "bg-indigo-transparent text-indigo",
-      link: route.salesreport,
+      link: route.driverWallet,
       showStats: false,
     },
     {
@@ -135,7 +135,7 @@ const NewDashboard = () => {
       title: "Card Payment",
       iconClass: "fa-solid fa-credit-card fs-18",
       iconBg: "bg-indigo-transparent text-indigo",
-      link: route.salesreport,
+      link: route,
       showStats: false,
     },
     {
@@ -151,7 +151,7 @@ const NewDashboard = () => {
       title: "Revenue",
       iconClass: "fa-solid fa-chart-line fs-18",
       iconBg: "bg-teal-transparent text-teal",
-      link: route.invoicereport,
+      link: route,
       showStats: false,
     },
     {
@@ -159,7 +159,7 @@ const NewDashboard = () => {
       title: "Total Verified Drivers",
       iconClass: "fa-solid fa-user-check fs-18",
       iconBg: "bg-orange-transparent text-orange",
-      link: route.expenselist,
+      link: route.Verifieddriver,
       showStats: false,
     },
     {
@@ -167,7 +167,7 @@ const NewDashboard = () => {
       title: "Total not Verified Drivers",
       iconClass: "fa-solid fa-user-xmark fs-18",
       iconBg: "bg-indigo-transparent text-indigo",
-      link: route.salesreport,
+      link: route.UnverifiedDriver,
       showStats: false,
     },
     {
@@ -175,7 +175,7 @@ const NewDashboard = () => {
       title: "Active Peak Zone",
       iconClass: "fa-solid fa-bolt fs-18",
       iconBg: "bg-indigo-transparent text-indigo",
-      link: route.salesreport,
+      link: route.Peakzones,
       showStats: false,
     },
     {
@@ -183,7 +183,7 @@ const NewDashboard = () => {
       title: "Rides",
       iconClass: "fa-solid fa-taxi fs-18",
       iconBg: "bg-indigo-transparent text-indigo",
-      link: route.salesreport,
+      link: route.allrides,
       showStats: false,
     },
   ];

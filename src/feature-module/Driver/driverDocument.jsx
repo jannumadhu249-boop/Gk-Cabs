@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PrimeDataTable from "../../components/data-table";
@@ -10,6 +9,8 @@ export default function Driverdocument() {
   /* ===================== STATE ===================== */
   const [rows, setRows] = useState(5);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [showImageModal, setShowImageModal] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const [tableData, setTableData] = useState(
     CouponData.map((item) => ({
@@ -18,13 +19,13 @@ export default function Driverdocument() {
         ? item.Status.charAt(0).toUpperCase() +
           item.Status.slice(1).toLowerCase()
         : "Pending",
-    }))
+    })),
   );
 
   /* ===================== ROW SELECTION ===================== */
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
     );
   };
 
@@ -36,16 +37,16 @@ export default function Driverdocument() {
   const approveDocument = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Approved" } : item
-      )
+        item.id === id ? { ...item, Status: "Approved" } : item,
+      ),
     );
   };
 
   const rejectDocument = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Rejected" } : item
-      )
+        item.id === id ? { ...item, Status: "Rejected" } : item,
+      ),
     );
   };
 
@@ -55,10 +56,8 @@ export default function Driverdocument() {
 
     setTableData((prev) =>
       prev.map((item) =>
-        selectedRows.includes(item.id)
-          ? { ...item, Status: "Trash" }
-          : item
-      )
+        selectedRows.includes(item.id) ? { ...item, Status: "Trash" } : item,
+      ),
     );
     setSelectedRows([]);
   };
@@ -73,8 +72,7 @@ export default function Driverdocument() {
         <input
           type="checkbox"
           checked={
-            visibleData.length > 0 &&
-            selectedRows.length === visibleData.length
+            visibleData.length > 0 && selectedRows.length === visibleData.length
           }
           onChange={(e) => handleSelectAll(e.target.checked)}
         />
@@ -134,9 +132,17 @@ export default function Driverdocument() {
             <i className="ti ti-edit" />
           </Link>
 
-          <Link className="me-2 p-2" to="#" title="View">
+          <button
+            className="me-2 "
+            to="#"
+            title="View"
+            onClick={() => {
+              setSelectedImage(row.documentImage); // 👈 your image field
+              setShowImageModal(true);
+            }}
+          >
             <i className="ti ti-eye" />
-          </Link>
+          </button>
 
           {/* APPROVE */}
           <button
@@ -168,7 +174,9 @@ export default function Driverdocument() {
       <div className="content">
         <div className="page-header d-flex justify-content-between align-items-center">
           <h4>Drivers Documents</h4>
-          <Link to="/addDocument" className="btn btn-outline-success">+ Add Document</Link>
+          <Link to="/addDocument" className="btn btn-outline-success">
+            <i className="ti ti-circle-plus me-1" /> Add Document
+          </Link>
         </div>
 
         <div className="card table-list-card">
@@ -228,6 +236,31 @@ export default function Driverdocument() {
               >
                 Apply
               </button>
+
+              {showImageModal && (
+                <div className="modal d-block" tabIndex="-1">
+                  <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title">Document Image</h5>
+                        <button
+                          type="button"
+                          className="btn-close"
+                          onClick={() => setShowImageModal(false)}
+                        ></button>
+                      </div>
+
+                      <div className="modal-body text-center">
+                        <img
+                          src={selectedImage}
+                          alt="Document"
+                          className="img-fluid rounded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             <SearchFromApi rows={rows} setRows={setRows} />

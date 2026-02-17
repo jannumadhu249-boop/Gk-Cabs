@@ -131,14 +131,14 @@ export default function Zones() {
           >
             <i className="ti ti-edit" />
           </Link>
-          <Link
+          {/* <Link
             to="#"
             className="p-2"
             data-bs-toggle="modal"
             data-bs-target="#delete-modal"
           >
             <i className="ti ti-trash" />
-          </Link>
+          </Link> */}
         </div>
       ),
     },

@@ -47,6 +47,7 @@ export const SidebarData = [
         submenuItems: [
           { label: "All Peak Zones", link: "/peakzones"},
           { label: "Add Peak Zones", link: "/addpeakZones"},
+          { label: "Peak Zone Map", link : "/PeakZoneMap"},
         ]
       },
       {
@@ -98,17 +99,18 @@ export const SidebarData = [
         showSubRoute: false,
         submenuItems:[
           { label: "Serivce Categories", link: "/serviceCategorie"},
-          { label: "Vehicles", link: "/vehicleType"},
+          { label: "Vehicles Group", link: "/vehicleType"},
+          { label: "Vehicle Model", link: "/vehicleModel"},
         ]
       },
       {
-        label: "Vehicle Manages",
-        icon: "ti ti-car",
+        label: "Fare Manages",
+        icon: "ti ti-cash",
         submenu: true,
         showSubRoute: false,
         submenuItems:[
-          { label: "Vehicle Group", link: "/vehicleGroup"},
-          { label: "Vehicle Model", link: "/vehicleModel"},
+          { label: "Fare Plans", link: "/fareplans"},
+          // { label: "Vehicle Model", link: "/vehicleModel"},
         ]
       },
       {
@@ -119,7 +121,7 @@ export const SidebarData = [
         showSubRoute: false,
       },
       {
-        label: "Popular Destinations",
+        label: "Advertising Banners",
         icon: "ti ti-map-pin-star",
         link: "/popularDestionation",
         submenu: false,

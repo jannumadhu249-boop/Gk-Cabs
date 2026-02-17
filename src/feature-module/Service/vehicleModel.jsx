@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PrimeDataTable from "../../components/data-table";
@@ -6,7 +5,7 @@ import { CouponData } from "../../core/json/Coupons";
 import CommonFooter from "../../components/footer/commonFooter";
 import SearchFromApi from "../../components/data-table/search";
 
-export default function WalletComments() {
+export default function VehicleModel() {
   /* ===================== STATE ===================== */
   const [rows, setRows] = useState(5);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -18,13 +17,13 @@ export default function WalletComments() {
         ? item.Status.charAt(0).toUpperCase() +
           item.Status.slice(1).toLowerCase()
         : "Pending",
-    }))
+    })),
   );
 
   /* ===================== ROW SELECTION ===================== */
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
+      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
     );
   };
 
@@ -33,19 +32,19 @@ export default function WalletComments() {
   };
 
   /* ===================== STATUS ACTIONS ===================== */
-  const approveDocument = (id) => {
+  const activeVehicle = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Approved" } : item
-      )
+        item.id === id ? { ...item, Status: "Active" } : item,
+      ),
     );
   };
 
-  const rejectDocument = (id) => {
+  const inactiveVehicle = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Rejected" } : item
-      )
+        item.id === id ? { ...item, Status: "Inactive" } : item,
+      ),
     );
   };
 
@@ -55,10 +54,8 @@ export default function WalletComments() {
 
     setTableData((prev) =>
       prev.map((item) =>
-        selectedRows.includes(item.id)
-          ? { ...item, Status: "Trash" }
-          : item
-      )
+        selectedRows.includes(item.id) ? { ...item, Status: "Trash" } : item,
+      ),
     );
     setSelectedRows([]);
   };
@@ -73,8 +70,7 @@ export default function WalletComments() {
         <input
           type="checkbox"
           checked={
-            visibleData.length > 0 &&
-            selectedRows.length === visibleData.length
+            visibleData.length > 0 && selectedRows.length === visibleData.length
           }
           onChange={(e) => handleSelectAll(e.target.checked)}
         />
@@ -96,55 +92,63 @@ export default function WalletComments() {
     //   field: "id",
     // },
     {
-      header: "Name",
-      field: "name",
+      header: "Group Name",
+      field: "groupname",
+    },
+    {
+      header: "Model Name",
+      field: "modelname",
+    },
+    {
+      header: "Seater",
+      field: "seater",
     },
     {
       header: "Priority",
       field: "priority",
-    },  
-    // {
-    //   header: "Status",
-    //   body: (row) => {
-    //     let badgeClass = "bg-warning text-dark";
-    //     if (row.Status === "Approved") badgeClass = "bg-success";
-    //     if (row.Status === "Rejected") badgeClass = "bg-danger";
+    },
+    {
+      header: "Status",
+      body: (row) => {
+        let badgeClass = "bg-warning text-dark";
+        if (row.Status === "Active") badgeClass = "bg-success";
+        if (row.Status === "Inactive") badgeClass = "bg-danger";
 
-    //     return <span className={`badge ${badgeClass}`}>{row.Status}</span>;
-    //   },
-    // },
+        return <span className={`badge ${badgeClass}`}>{row.Status}</span>;
+      },
+    },
     {
       header: "Actions",
       body: (row) => (
         <div className="edit-delete-action d-flex align-items-center">
           {/* VIEW */}
-          <Link className="me-2 p-2" to="/EditComments" title="Edit">
+          <Link className="me-2 p-2" to="/EditVehicleModel" title="Edit">
             <i className="ti ti-edit" />
           </Link>
-{/* 
+          {/* 
           <Link className="me-2 p-2" to="#" title="Delete">
             <i className="ti ti-trash" />
           </Link> */}
 
           {/* APPROVE */}
-          {/* <button
+          <button
             className="btn p-2 text-success"
-            title="Approve"
-            onClick={() => approveDocument(row.id)}
-            disabled={row.Status === "Approved"}
+            title="Active"
+            onClick={() => activeVehicle(row.id)}
+            disabled={row.Status === "Active"}
           >
             <i className="ti ti-check" />
-          </button> */}
+          </button>
 
           {/* REJECT */}
-          {/* <button
+          <button
             className="btn p-2 text-danger"
-            title="Reject"
-            onClick={() => rejectDocument(row.id)}
-            disabled={row.Status === "Rejected"}
+            title="Inactive"
+            onClick={() => inactiveVehicle(row.id)}
+            disabled={row.Status === "Inactive"}
           >
             <i className="ti ti-x" />
-          </button> */}
+          </button>
         </div>
       ),
     },
@@ -155,10 +159,11 @@ export default function WalletComments() {
     <div className="page-wrapper">
       <div className="content">
         <div className="page-header d-flex justify-content-between align-items-center">
-          <h4>Wallet Comments</h4>
-          <Link to="/addComments" className="btn btn-outline-success">
-          <i className="ti ti-circle-plus me-1"/>
-          Add Comments</Link>
+          <h4>List of Vehicle Model</h4>
+          <Link to="/addvehicleModel" className="btn btn-outline-success">
+            <i className="ti ti-circle-plus me-1" />
+            Add New Model{" "}
+          </Link>
         </div>
 
         <div className="card table-list-card">
@@ -190,23 +195,23 @@ export default function WalletComments() {
 
               {/* Bulk */}
               <div className="dropdown">
-                <button
-                  type="button"
+                <Link
+                  to="#"
                   className="btn btn-white dropdown-toggle"
                   data-bs-toggle="dropdown"
                 >
                   Bulk Actions
-                </button>
+                </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <button
+                    <Link
                       to="#"
                       className="dropdown-item text-danger"
                       onClick={handleBulkTrash}
                     >
                       <i className="ti ti-trash me-2" />
                       Move to Trash
-                    </button>
+                    </Link>
                   </li>
                 </ul>
               </div>

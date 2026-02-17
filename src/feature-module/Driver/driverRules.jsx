@@ -155,9 +155,10 @@ export default function DriverRules() {
           </Link> */}
           <Link
             className="me-2 p-2"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#edit-units"
+            to="/editdriverRules"
+            title="Edit Rule"
+            // data-bs-toggle="modal"
+            // data-bs-target="#edit-units"
           >
             <i className="ti ti-edit" />
           </Link>

@@ -145,15 +145,15 @@ export default function Riders() {
           >
             <i className="ti ti-eye" />
           </Link>
-          {/* <Link
+          <Link
             className="me-2 p-2"
-            to="#"
-            data-bs-toggle="modal"
-            data-bs-target="#edit-units"
+            to="/EditRiderProfile"
+            // data-bs-toggle="modal"
+            // data-bs-target="#edit-units"
           >
             <i className="ti ti-edit" />
           </Link>
-          <Link
+          {/* <Link
             className="p-2"
             to="#"
             data-bs-toggle="modal"

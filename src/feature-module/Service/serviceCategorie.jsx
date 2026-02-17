@@ -10,7 +10,7 @@ import SearchFromApi from "../../components/data-table/search";
 
 export default function SerivceCategorie() {
   /* ===================== STATE ===================== */
-  const [rows, setRows] = useState(5);
+  const [rows, setRows] = useState(4);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -93,8 +93,8 @@ export default function SerivceCategorie() {
       field: "name",
     },
     {
-      header: "Service",
-      field: "service",
+      header: "Priority",
+      field: "priority",
     },
     {
       header: "Status",

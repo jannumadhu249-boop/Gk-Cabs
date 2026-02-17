@@ -127,9 +127,10 @@ export default function Peakzones() {
           <div className="edit-delete-action">
             <Link
               className="me-2 p-2"
-              to="#"
-              data-bs-toggle="modal"
-              data-bs-target="#edit-units"
+              to="/Edit-Peak-Zones"
+              title="Edit Zone"
+              // data-bs-toggle="modal"
+              // data-bs-target="#edit-units"
             >
               <i className="ti ti-edit" />
             </Link>
@@ -138,6 +139,7 @@ export default function Peakzones() {
               data-bs-target="#delete-modal"
               className="p-2"
               to="#"
+              title="Delete"
             >
               <i className="ti ti-trash" />
             </Link>

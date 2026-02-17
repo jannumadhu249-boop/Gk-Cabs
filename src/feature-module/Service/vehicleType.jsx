@@ -83,16 +83,20 @@ export default function VehicleType() {
       body: (_row, options) => options.rowIndex + 1,
     },
     {
-      header: "Name",
-      field: "name",
+      header: "Group Name",
+      field: "vehiclename",
     },
     {
-      header: "Service",
-      field: "service",
+      header: "Priority",
+      field: "priority",
     },
     {
-      header: "Service Categorie",
-      field: "vechicletype",
+      header: "Down Grade",
+      field: "priority",
+    },
+    {
+      header: "Description",
+      field: "description",
     },
     {
       header: "Status",
@@ -127,14 +131,14 @@ export default function VehicleType() {
         <div className="edit-price-zone-action">
           <Link
             className="me-2 p-2"
-            to="#"
+            to="/EditVehicleGroup"
             title="Edit"
-            data-bs-toggle="modal"
-            data-bs-target="#edit-units"
+            // data-bs-toggle="modal"
+            // data-bs-target="#edit-units"
           >
             <i className="ti ti-edit" />
           </Link>
-          <Link to="#" className="me-2 p-2 text-muted" title="Surge Price">
+          <Link to="/vehiclesurgeprice" className="me-2 p-2 text-muted" title="Surge Price">
             <i className="ti ti-trending-up" />
           </Link>
           <Link to="/vehicleZone" className="me-2 p-2 text-muted" title="Vehicle Zone">
@@ -152,9 +156,9 @@ export default function VehicleType() {
       <div className="content">
         <div className="page-header d-flex justify-content-between">
           <div>
-            <h4>Vehicle Types</h4>
+            <h4>Vehicle Group</h4>
           </div>
-          <Link to="#" className="btn btn-outline-success">
+          <Link to="/addvehicleGroup" className="btn btn-outline-success">
             <i className="ti ti-circle-plus me-1" />
             Add New Vehicle
           </Link>

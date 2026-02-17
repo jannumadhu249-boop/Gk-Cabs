@@ -67,9 +67,9 @@ import AddNewDestionation from "../feature-module/Popular Destionation/addDestio
 import WalletComments from "../feature-module/Wallet Comments/walletComments";
 import AddComments from "../feature-module/Wallet Comments/addComments";
 import VehicleGroup from "../feature-module/Vehicle Manage/vehicleGroup";
-import AddVehicleGroup from "../feature-module/Vehicle Manage/addvehicleGroup";
-import VehicleModel from "../feature-module/Vehicle Manage/vehicleModel";
-import AddVehicleModel from "../feature-module/Vehicle Manage/addvehicleModel";
+import AddVehicleGroup from "../feature-module/Service/addvehicleGroup";
+import VehicleModel from "../feature-module/Service/vehicleModel";
+import AddVehicleModel from "../feature-module/Service/addvehicleModel";
 import RideRequests from "../feature-module/Rides/rideRequest";
 import AllRides from "../feature-module/Rides/allRides";
 import ScheduledRides from "../feature-module/Rides/scheduledRides";
@@ -96,6 +96,18 @@ import AddPeakzones from "../feature-module/Peak Zones/addpeakZones";
 import ViewRiderDetails from "../feature-module/Rider/viewrider";
 import ViewRideDetails from "../feature-module/Rider/rideDetails";
 import ViewDriverDetails from "../feature-module/Driver/viewdriverDetails";
+import EditDriver from "../feature-module/Driver/editdriver";
+import EditDriverRules from "../feature-module/Driver/editdriverRules";
+import VehicleSurgePrice from "../feature-module/Service/vehiclesurgeprice";
+import FarePlans from "../feature-module/Fare Manages/fareplans";
+import AddFarePlan from "../feature-module/Fare Manages/addfareplan";
+import EditFarePlan from "../feature-module/Fare Manages/editfareplan";
+import EditPeakZones from "../feature-module/Peak Zones/Edit-Peak-Zones";
+import PeakZoneMap from "../feature-module/Peak Zones/PeakZoneMap";
+import EditRiderProfile from "../feature-module/Rider/EditRiderProfile";
+import EditVehicleGroup from "../feature-module/Service/EditVehicleGroup";
+import EditVehicleModel from "../feature-module/Service/EditVehicleModel";
+import EditComments from "../feature-module/Wallet Comments/EditComments";
 
 const ProductList = lazy(
   () => import("../feature-module/inventory/productlist"),
@@ -630,6 +642,48 @@ const routes = all_routes;
 export const authRoutes = [
   {
     id: 1,
+    path: routes.editfareplan,
+    name: "Fare Manages",
+    element: <EditFarePlan />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.addfareplan,
+    name: "Fare Manages",
+    element: <AddFarePlan />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.fareplans,
+    name: "Fare Manages",
+    element: <FarePlans />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.vehiclesurgeprice,
+    name: "Service Type",
+    element: <VehicleSurgePrice />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editdriverrule,
+    name: "Driver",
+    element: <EditDriverRules />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editdriver,
+    name: "Driver",
+    element: <EditDriver />,
+    route: Route,
+  },
+  {
+    id: 1,
     path: routes.viewdriverdetails,
     name: "Driver",
     element: <ViewDriverDetails />,
@@ -805,7 +859,14 @@ export const authRoutes = [
   },
   {
     id: 1,
-    path: routes.addvegiclemodel,
+    path: routes.editvehiclemodel,
+    name: "Vehicle Manage",
+    element: <EditVehicleModel />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.addvehiclemodel,
     name: "Vehicle Manage",
     element: <AddVehicleModel />,
     route: Route,
@@ -815,6 +876,13 @@ export const authRoutes = [
     path: routes.vehiclemodel,
     name: "Vehicle Manage",
     element: <VehicleModel />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editvehiclegroup,
+    name: "Vehicle Manage",
+    element: <EditVehicleGroup />,
     route: Route,
   },
   {
@@ -829,6 +897,13 @@ export const authRoutes = [
     path: routes.vehiclegroup,
     name: "Vehicle Manage",
     element: <VehicleGroup />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editcomments,
+    name: "Wallet Comments",
+    element: <EditComments />,
     route: Route,
   },
   {
@@ -994,9 +1069,30 @@ export const authRoutes = [
   },
   {
     id: 1,
+    path: routes.editriderprofile,
+    name: "Rider",
+    element: <EditRiderProfile />,
+    route: Route,
+  },
+  {
+    id: 1,
     path: routes.Allriders,
     name: "Rider",
     element: <Riders />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.peakzonemap,
+    name: "Peakzones",
+    element: <PeakZoneMap />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editpeakzones,
+    name: "Peakzones",
+    element: <EditPeakZones />,
     route: Route,
   },
   {
@@ -1063,6 +1159,8 @@ export const authRoutes = [
     element: <Dashboard />,
     route: Route,
   },
+
+
 
 
 
