@@ -1,25 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { all_routes } from "../../routes/all_routes";
+import CommonFooter from "../../components/footer/commonFooter";
 //
 
 const Addzones = () => {
   const route = all_routes;
   const [Addzones, setAddzones] = useState(false);
   const [Addzones2, setAddzones2] = useState(true);
-  const [date1, setDate1] = useState(new Date());
-  const [date2, setDate2] = useState(new Date());
-  const [selectedStore, setSelectedStore] = useState(null);
-  const [selectedWarehouse, setSelectedWarehouse] = useState(null);
-  const [selectedSellingType, setSelectedSellingType] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSubCategory, setSelectedSubCategory] = useState(null);
-  const [selectedBrand, setSelectedBrand] = useState(null);
-  const [selectedUnit, setSelectedUnit] = useState(null);
-  const [selectedBarcodeSymbol, setSelectedBarcodeSymbol] = useState(null);
-  const [selectedTaxType, setSelectedTaxType] = useState(null);
-  const [selectedDiscountType, setSelectedDiscountType] = useState(null);
-  const [selectedWarranty, setSelectedWarranty] = useState(null);
   const [text, setText] = useState("");
   const [status, setStatus] = useState(true);
 
@@ -205,17 +193,8 @@ const Addzones = () => {
           </div>
           {/* /add */}
         </div>
-        <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0 text-gray-9">
-            2014 - 2026 © Gk Cabs. All Right Reserved
-          </p>
-          <p>
-            Designed &amp; Developed by{" "}
-            <Link to="#" className="text-primary">
-              Gk Cabs
-            </Link>
-          </p>
-        </div>
+
+        <CommonFooter />
       </div>
     </>
   );

@@ -79,6 +79,19 @@ export const all_routes = {
   fareplans: "/fareplans",
   addfareplan: "/addfareplan",
   editfareplan: "/editfareplan",
+  user: "/User",
+  adduser: "/AddUser",
+  edituser: "/EditUser",
+  rolepermission: "/Role-Permission",
+  addrolepermission: "/Add-Role",
+  editrolepermission: "/Edit-Role",
+  riderequestdetails: "/Ride-Request-Details",
+  sos: "/SOS",
+  addsos: "/AddSos",
+  editsos: "/EditSos",
+  sosalerts: "/SOs-Alerts",
+  sosalertdetails: "/Sos-Alert-Details",
+  heatmap: "/Heat-Map",
 
 
 

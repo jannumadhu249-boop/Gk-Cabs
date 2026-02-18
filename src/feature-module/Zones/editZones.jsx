@@ -16,16 +16,16 @@ const EditZones = () => {
                 <h4>Edit zone</h4>
               </div>
             </div>
-            {/* <ul className="table-top-head">
+            <ul className="table-top-head">
               <li>
                 <div className="page-btn">
-                  <Link to="/airportzones" className="btn btn-secondary">
+                  <Link to="/Zones" className="btn btn-secondary">
                     <i className="feather icon-arrow-left me-2" />
-                    Back to Airportzones
+                    Back to Zones
                   </Link>
                 </div>
               </li>
-            </ul> */}
+            </ul>
           </div>
           {/* /add */}
           <div className="row">

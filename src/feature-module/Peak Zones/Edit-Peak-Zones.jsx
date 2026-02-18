@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { all_routes } from "../../routes/all_routes";
+import CommonFooter from "../../components/footer/commonFooter";
 
 const EditPeakZones = () => {
   const route = all_routes;
@@ -154,7 +155,7 @@ const EditPeakZones = () => {
           </div>
           {/* /add */}
         </div>
-        <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
+        {/* <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
           <p className="mb-0 text-gray-9">
             2014 - 2026 © Gk Cabs. All Right Reserved
           </p>
@@ -164,7 +165,9 @@ const EditPeakZones = () => {
               Gk Cabs
             </Link>
           </p>
-        </div>
+        </div> */}
+
+        <CommonFooter />
       </div>
     </>
   );

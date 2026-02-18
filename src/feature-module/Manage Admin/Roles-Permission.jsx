@@ -1,17 +1,15 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PrimeDataTable from "../../components/data-table";
-import { CouponData } from "../../core/json/Coupons";
+import { CouponData } from "../../core/json/coupons";
 import EditZones from "../../core/modals/coupons/editcoupons";
 import CommonFooter from "../../components/footer/commonFooter";
 import DeleteModal from "../../components/delete-modal";
 import SearchFromApi from "../../components/data-table/search";
 
-export default function RideRequests() {
-  /* ===================== STATE ===================== */
+export default function RolePermission() {
+  const [_searchQuery, setSearchQuery] = useState("");
   const [rows, setRows] = useState(5);
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
 
   const [tableData, setTableData] = useState(
@@ -33,7 +31,7 @@ export default function RideRequests() {
     );
   };
 
-  /* ===================== ROW SELECTION ===================== */
+    /* ===================== ROW SELECTION ===================== */
 
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
@@ -47,7 +45,7 @@ export default function RideRequests() {
     setSelectedRows(checked ? tableData.map((row) => row.id) : []);
   };
 
-  /* ===================== BULK ACTIONS ===================== */
+    /* ===================== BULK ACTIONS ===================== */
 
   const handleBulkStatus = (status) => {
     if (!selectedRows.length) return;
@@ -62,7 +60,9 @@ export default function RideRequests() {
     setSelectedRows([]);
   };
 
-  /* ===================== COLUMNS ===================== */
+  const dataSource = CouponData;
+
+   /* ===================== COLUMNS ===================== */
 
   const columns = [
     {
@@ -89,27 +89,27 @@ export default function RideRequests() {
       body: (_row, options) => options.rowIndex + 1,
     },
     {
-      header: "Ride Number",
-      field: "ridenumber",
+      header: "Name",
+      field: "Name",
     },
     {
-      header: "Rider",
-      field: "rider",
-    },
-    {
-      header: "Service",
-      field: "service",
-    },
-    {
-      header: "Service Category",
-      field: "servicecategory",
-    },
-    {
-      header: "Total",
-      field: "total",
+      header: "Status",
+      body: (row) => (
+        <div className="form-check form-switch">
+          <input
+          type="checkbox"
+          className={`form-check-input ${
+              row.Status ? "bg-success" : "bg-danger"
+            }`}
+            checked={row.Status}
+            onChange={() => toggleStatus(row.id)}
+          />
+        </div>
+      ),
     },
     {
       header: "Created Date",
+
       body: (row) =>
         row?.date
           ? new Date(row.date).toLocaleString("en-IN", {
@@ -123,36 +123,50 @@ export default function RideRequests() {
     {
       header: "Actions",
       body: () => (
-        <div className="view-action">
-          <Link
-            className="me-2 p-2"
-            to="/Ride-Request-Details"
-            title="Ride Request Details"
-          >
-            <i className="ti ti-eye" />
-          </Link>
+        <div className="action-table-data">
+          <div className="edit-delete-action">
+            <Link
+              className="me-2 p-2"
+              to="/Edit-Role"
+              title="Edit Zone"
+              // data-bs-toggle="modal"
+              // data-bs-target="#edit-units"
+            >
+              <i className="ti ti-edit" />
+            </Link>
+            <Link
+              data-bs-toggle="modal"
+              data-bs-target="#delete-modal"
+              className="p-2"
+              to="#"
+              title="Delete"
+            >
+              <i className="ti ti-trash" />
+            </Link>
+          </div>
         </div>
       ),
     },
   ];
 
-  /* ===================== JSX ===================== */
-
   return (
-    <div className="page-wrapper">
-      <div className="content">
-        <div className="page-header d-flex justify-content-between">
-          <div>
-            <h4>Ride Requsts</h4>
+    <div>
+      <div className="page-wrapper">
+        <div className="content">
+          <div className="page-header">
+            <div className="add-item d-flex">
+              <div className="page-title">
+                <h4>Role & Permission</h4>
+              </div>
+            </div>
+             <Link to="/Add-Role" className="btn btn-primary">
+              <i className="ti ti-circle-plus me-1" />Add New</Link>
           </div>
-          {/* <Link to="#" className="btn btn-outline-success"><i className="ti ti-circle-plus me-2" />Add New</Link> */}
-        </div>
-
-        <div className="card table-list-card">
-          <div className="card-header d-flex justify-content-between flex-wrap gap-2">
-            <div className="d-flex gap-2 flex-wrap">
-              {/* Rows Dropdown */}
-              <div className="dropdown">
+          {/* /product list */}
+          <div className="card table-list-card">
+            <div className="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
+              <div className="d-flex table-dropdown my-xl-auto right-content align-items-center flex-wrap row-gap-3">
+              <div className="dropdown me-2">
                 <Link
                   to="#"
                   className="btn btn-white dropdown-toggle"
@@ -175,8 +189,7 @@ export default function RideRequests() {
                 </ul>
               </div>
 
-              {/* Bulk Actions */}
-              {/* <div className="dropdown">
+              <div className="dropdown me-2">
                 <Link
                   to="#"
                   className="btn btn-white dropdown-toggle"
@@ -188,51 +201,43 @@ export default function RideRequests() {
                   <li>
                     <Link
                       to="#"
-                      className="dropdown-item text-success"
-                      onClick={() => handleBulkStatus(true)}
-                    >
-                      Active
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
                       className="dropdown-item text-danger"
                       onClick={() => handleBulkStatus(false)}
                     >
-                      Inactive
+                      Delete Permanently
                     </Link>
                   </li>
                 </ul>
-              </div> */}
+              </div>
 
-              <button
-                className="btn btn-outline-success"
-                disabled={!selectedRows.length}
-              >
-                Apply
-              </button>
+                <button className="btn btn-outline-success">Apply</button>
+              </div>
+
+              <SearchFromApi
+                callback={handleSearch}
+                rows={rows}
+                setRows={setRows}
+              />
             </div>
 
-            <SearchFromApi
-              callback={handleSearch}
-              rows={rows}
-              setRows={setRows}
-            />
-          </div>
-
-          <div className="card-body">
-            <PrimeDataTable
-              column={columns}
-              data={tableData}
-              totalRecords={tableData.length}
-              rows={rows}
-            />
+            <div className="card-body">
+              <div className="table-responsive">
+                <PrimeDataTable
+                  column={columns}
+                  data={dataSource}
+                  totalRecords={5}
+                  rows={10}
+                  setRows={() => {}}
+                  currentPage={2}
+                  setCurrentPage={() => {}}
+                />
+              </div>
+            </div>
           </div>
         </div>
+        <CommonFooter />
       </div>
 
-      <CommonFooter />
       <EditZones />
       <DeleteModal />
     </div>

@@ -17,6 +17,7 @@ import {
 } from "chart.js";
 import { all_routes } from "../../routes/all_routes";
 import CommonDateRangePicker from "../../components/date-range-picker/common-date-range-picker";
+import CommonFooter from "../../components/footer/commonFooter";
 
 ChartJS.register(
   CategoryScale,
@@ -658,18 +659,7 @@ const NewDashboard = () => {
           </div>
         </div>
       </div>
-
-      <div className="copyright-footer d-flex align-items-center justify-content-between border-top bg-white gap-3 flex-wrap">
-        <p className="fs-13 text-gray-9 mb-0">
-          2014-2026 © Gk Cabs. All Right Reserved
-        </p>
-        <p>
-          Designed &amp; Developed By{" "}
-          <Link to="#" className="link-primary">
-            Gk Cabs
-          </Link>
-        </p>
-      </div>
+      <CommonFooter />
     </section>
   );
 };

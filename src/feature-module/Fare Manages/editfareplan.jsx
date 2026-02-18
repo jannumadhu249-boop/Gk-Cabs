@@ -6,7 +6,6 @@ const EditFarePlan = () => {
     serviceName: "",
     farePlanName: "",
     priority: "",
-
   });
 
   // Common change handler
@@ -31,7 +30,7 @@ const EditFarePlan = () => {
             <h4>Edit Fare Plan</h4>
           </div>
           <Link to="/fareplans" className="btn btn-secondary">
-          <i className="feather icon-arrow-left me-2" />
+            <i className="feather icon-arrow-left me-2" />
             Back to Fare Plan
           </Link>
         </div>
@@ -39,7 +38,6 @@ const EditFarePlan = () => {
         <form onSubmit={handleSubmit}>
           <div className="card border mb-4">
             <div className="card-body">
-
               {/* Service Name */}
               <div className="mb-3">
                 <label className="form-label">Service Name</label>
@@ -51,8 +49,12 @@ const EditFarePlan = () => {
                   onChange={handleChange}
                   required
                 >
-                    <option></option>
-                    </select>
+                  <option>Select Serivce</option>
+                  <option>City Ride</option>
+                  <option>Outstation Oneway</option>
+                  <option>outastation Round Trip</option>
+                  <option>Rental Hourly Package</option>
+                </select>
               </div>
 
               {/* Fare Plan Name */}
@@ -101,7 +103,6 @@ const EditFarePlan = () => {
                   Update Plan
                 </button>
               </div>
-
             </div>
           </div>
         </form>

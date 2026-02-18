@@ -1,14 +1,11 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PrimeDataTable from "../../components/data-table";
 import { CouponData } from "../../core/json/Coupons";
-import EditZones from "../../core/modals/coupons/editcoupons";
 import CommonFooter from "../../components/footer/commonFooter";
-import DeleteModal from "../../components/delete-modal";
 import SearchFromApi from "../../components/data-table/search";
 
-export default function RideRequests() {
+export default function SosAlerts() {
   /* ===================== STATE ===================== */
   const [rows, setRows] = useState(5);
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,8 +14,8 @@ export default function RideRequests() {
   const [tableData, setTableData] = useState(
     CouponData.map((item) => ({
       ...item,
-      Status: item.Status ?? true,
-    }))
+      Status: item.Status ?? true, // default Active
+    })),
   );
 
   /* ===================== HANDLERS ===================== */
@@ -28,8 +25,8 @@ export default function RideRequests() {
   const toggleStatus = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: !item.Status } : item
-      )
+        item.id === id ? { ...item, Status: !item.Status } : item,
+      ),
     );
   };
 
@@ -37,9 +34,7 @@ export default function RideRequests() {
 
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
-      prev.includes(id)
-        ? prev.filter((rowId) => rowId !== id)
-        : [...prev, id]
+      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
     );
   };
 
@@ -54,10 +49,8 @@ export default function RideRequests() {
 
     setTableData((prev) =>
       prev.map((item) =>
-        selectedRows.includes(item.id)
-          ? { ...item, Status: status }
-          : item
-      )
+        selectedRows.includes(item.id) ? { ...item, Status: status } : item,
+      ),
     );
     setSelectedRows([]);
   };
@@ -70,8 +63,7 @@ export default function RideRequests() {
         <input
           type="checkbox"
           checked={
-            tableData.length > 0 &&
-            selectedRows.length === tableData.length
+            tableData.length > 0 && selectedRows.length === tableData.length
           }
           onChange={(e) => handleSelectAll(e.target.checked)}
         />
@@ -89,24 +81,23 @@ export default function RideRequests() {
       body: (_row, options) => options.rowIndex + 1,
     },
     {
-      header: "Ride Number",
-      field: "ridenumber",
+      header: "Created By",
+      field: "createdby",
     },
     {
-      header: "Rider",
-      field: "rider",
-    },
-    {
-      header: "Service",
-      field: "service",
-    },
-    {
-      header: "Service Category",
-      field: "servicecategory",
-    },
-    {
-      header: "Total",
-      field: "total",
+      header: "Status",
+      body: (row) => (
+        <div className="form-check form-switch">
+          <input
+            type="checkbox"
+            className={`form-check-input ${
+              row.Status ? "bg-success" : "bg-danger"
+            }`}
+            checked={row.Status}
+            onChange={() => toggleStatus(row.id)}
+          />
+        </div>
+      ),
     },
     {
       header: "Created Date",
@@ -123,12 +114,8 @@ export default function RideRequests() {
     {
       header: "Actions",
       body: () => (
-        <div className="view-action">
-          <Link
-            className="me-2 p-2"
-            to="/Ride-Request-Details"
-            title="Ride Request Details"
-          >
+        <div className="edit-delete-action">
+          <Link className="me-2 p-2" to="/Sos-Alert-Details">
             <i className="ti ti-eye" />
           </Link>
         </div>
@@ -143,9 +130,11 @@ export default function RideRequests() {
       <div className="content">
         <div className="page-header d-flex justify-content-between">
           <div>
-            <h4>Ride Requsts</h4>
+            <h4>SOS Alerts</h4>
           </div>
-          {/* <Link to="#" className="btn btn-outline-success"><i className="ti ti-circle-plus me-2" />Add New</Link> */}
+          {/* <Link to="/AddSos" className="btn btn-primary">
+            <i className="ti ti-circle-plus me-1" /> Add SOS
+          </Link> */}
         </div>
 
         <div className="card table-list-card">
@@ -176,7 +165,7 @@ export default function RideRequests() {
               </div>
 
               {/* Bulk Actions */}
-              {/* <div className="dropdown">
+              <div className="dropdown">
                 <Link
                   to="#"
                   className="btn btn-white dropdown-toggle"
@@ -197,14 +186,23 @@ export default function RideRequests() {
                   <li>
                     <Link
                       to="#"
+                      className="dropdown-item text-gray"
+                      onClick={() => handleBulkStatus(false)}
+                    >
+                      Mark As Completed
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
                       className="dropdown-item text-danger"
                       onClick={() => handleBulkStatus(false)}
                     >
-                      Inactive
+                      Move to Trash
                     </Link>
                   </li>
                 </ul>
-              </div> */}
+              </div>
 
               <button
                 className="btn btn-outline-success"
@@ -233,8 +231,6 @@ export default function RideRequests() {
       </div>
 
       <CommonFooter />
-      <EditZones />
-      <DeleteModal />
     </div>
   );
 }

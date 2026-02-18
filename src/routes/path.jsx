@@ -108,6 +108,20 @@ import EditRiderProfile from "../feature-module/Rider/EditRiderProfile";
 import EditVehicleGroup from "../feature-module/Service/EditVehicleGroup";
 import EditVehicleModel from "../feature-module/Service/EditVehicleModel";
 import EditComments from "../feature-module/Wallet Comments/EditComments";
+import { User } from "react-feather";
+import ManageUser from "../feature-module/Manage Admin/User";
+import AddUser from "../feature-module/Manage Admin/AddUser";
+import EditUser from "../feature-module/Manage Admin/EditUser";
+import RolePermission from "../feature-module/Manage Admin/Roles-Permission";
+import AddRolePermission from "../feature-module/Manage Admin/Add-Role";
+import EditRolePermission from "../feature-module/Manage Admin/Edit-Role";
+import RideRequestDetails from "../feature-module/Rider/Ride-Request-Details";
+import SOS from "../feature-module/SOS/SOS";
+import AddSos from "../feature-module/SOS/AddSos";
+import EditSos from "../feature-module/SOS/EditSos";
+import SosAlerts from "../feature-module/SOS/Sos-Alerts";
+import SosAlertDetails from "../feature-module/SOS/Sos-Alert-Details";
+import HeatMap from "../feature-module/Heat Map/Heat-Map";
 
 const ProductList = lazy(
   () => import("../feature-module/inventory/productlist"),
@@ -640,6 +654,97 @@ const Timeline = lazy(
 const routes = all_routes;
 
 export const authRoutes = [
+  {
+    id: 1,
+    path: routes.heatmap,
+    name: "Heat Map",
+    element: <HeatMap />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.sosalertdetails,
+    name: "SOS",
+    element: <SosAlertDetails />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.sosalerts,
+    name: "SOS",
+    element: <SosAlerts />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editsos,
+    name: "SOS",
+    element: <EditSos />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.addsos,
+    name: "SOS",
+    element: <AddSos />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.sos,
+    name: "SOS",
+    element: <SOS />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.riderequestdetails,
+    name: "Rides",
+    element: <RideRequestDetails />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editrolepermission,
+    name: "Manage Admin",
+    element: <EditRolePermission />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.addrolepermission,
+    name: "Manage Admin",
+    element: <AddRolePermission />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.rolepermission,
+    name: "Manage Admin",
+    element: <RolePermission />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.edituser,
+    name: "Manage Admin",
+    element: <EditUser />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.adduser,
+    name: "Manage Admin",
+    element: <AddUser />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.user,
+    name: "Manage Admin",
+    element: <ManageUser />,
+    route: Route,
+  },
   {
     id: 1,
     path: routes.editfareplan,

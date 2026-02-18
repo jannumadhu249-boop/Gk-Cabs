@@ -4,7 +4,9 @@ export const URLS={
     Base : base_url,
     ImageUrl: base_url,
 
-    login : base_url + "v1/gkcabs/admin/auth/authLogin"
+    login : base_url + "v1/gkcabs/admin/auth/authLogin",
+    profile : base_url + "v1/gkcabs/admin/auth/getprofile",
+    updateprofile : base_url + "v1/gkcabs/admin/auth/updateAdminProfile",
 }
 
 

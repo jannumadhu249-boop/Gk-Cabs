@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { all_routes } from "../../routes/all_routes";
+import CommonFooter from "../../components/footer/commonFooter";
 
 const EditAirportZones = () => {
   const route = all_routes;
@@ -16,7 +17,7 @@ const EditAirportZones = () => {
                 <h4>Edit Airportzone</h4>
               </div>
             </div>
-            {/* <ul className="table-top-head">
+            <ul className="table-top-head">
               <li>
                 <div className="page-btn">
                   <Link to="/airportzones" className="btn btn-secondary">
@@ -25,7 +26,7 @@ const EditAirportZones = () => {
                   </Link>
                 </div>
               </li>
-            </ul> */}
+            </ul>
           </div>
           {/* /add */}
           <div className="row">
@@ -154,7 +155,7 @@ const EditAirportZones = () => {
           </div>
           {/* /add */}
         </div>
-        <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
+        {/* <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
           <p className="mb-0 text-gray-9">
             2014 - 2026 © Gk Cabs. All Right Reserved
           </p>
@@ -164,7 +165,9 @@ const EditAirportZones = () => {
               Gk Cabs
             </Link>
           </p>
-        </div>
+        </div> */}
+
+        <CommonFooter />
       </div>
     </>
   );

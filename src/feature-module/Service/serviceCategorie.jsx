@@ -130,8 +130,6 @@ export default function SerivceCategorie() {
           <Link
             className="me-2 p-2"
             to="/editServices"
-            // data-bs-toggle="modal"
-            // data-bs-target="#edit-units"
           >
             <i className="ti ti-edit" />
           </Link>
