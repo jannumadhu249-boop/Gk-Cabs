@@ -21,6 +21,7 @@ export const URLS={
     AddZone : base_url + "v1/gkcabs/admin/zone/addzone",
     EditZone : base_url + "v1/gkcabs/admin/zone/updatezone",
     GetZoneById : base_url + "v1/gkcabs/admin/zone/getzonebyid/",
+    UpdateZoneStatus : base_url + "v1/gkcabs/admin/zone/updatezonestatus",
 
     // Airport Zones
 
@@ -28,6 +29,8 @@ export const URLS={
     AddAirportZone : base_url + "v1/gkcabs/admin/zone/addzone",
     EditAirportZone : base_url + "v1/gkcabs/admin/zone/updatezone",
     GetAirportZoneById : base_url + "v1/gkcabs/admin/zone/getzonebyid/",
+    UpdateAirportZoneStatus : base_url + "v1/gkcabs/admin/zone/updatezonestatus",
+
 
     // Peak Zones
 
@@ -35,6 +38,7 @@ export const URLS={
     AddPeakZone : base_url + "v1/gkcabs/admin/zone/addzone",
     EditPeakZone : base_url + "v1/gkcabs/admin/zone/updatezone",
     GetPeakZoneById : base_url + "v1/gkcabs/admin/zone/getzonebyid/",
+    UpdatePeakZoneStatus : base_url + "v1/gkcabs/admin/zone/updatezonestatus",
 
     // Service Categories
 

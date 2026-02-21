@@ -180,13 +180,14 @@ const AddAirportZones = () => {
                               className="form-control"
                               value={formData.name}
                               onChange={handleChange}
+                              placeholder="Enter Zone Name"
                               required
                             />
                           </div>
                         </div>
                       </div>
 
-                      {/* Unified Search / Place of Points field */}
+                      {/* Unified Search */}
                       <div className="row">
                         <div className="col-sm-6 col-12 w-100">
                           <div className="mb-3 list position-relative">
@@ -230,6 +231,7 @@ const AddAirportZones = () => {
                               className="form-control"
                               value={formData.priority}
                               onChange={handleChange}
+                              placeholder="Enter Priority"
                               required
                             />
                           </div>

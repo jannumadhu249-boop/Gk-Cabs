@@ -1,29 +1,78 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import PrimeDataTable from "../../components/data-table";
 import CommonFooter from "../../components/footer/commonFooter";
-import DeleteModal from "../../components/delete-modal";
 import SearchFromApi from "../../components/data-table/search";
 import { URLS } from "../../url";
 import axios from "axios";
 
 export default function Zones() {
-  const [rows, setRows] = useState(5);
+  const [rows, setRows] = useState();
+  const [currentPage, setCurrentPage] = useState(); 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
   const [error, setError] = useState("");
 
   // Handlers
-  const handleSearch = (value) => setSearchQuery(value);
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+    setCurrentPage(); 
+  };
 
-  const toggleStatus = (id) => {
-    setTableData((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, Status: !item.Status } : item
-      )
+  // Filter data based on search query
+  const filteredData = useMemo(() => {
+    if (!searchQuery.trim()) return tableData;
+    return tableData.filter((item) =>
+      item.Name?.toLowerCase().includes(searchQuery.toLowerCase())
     );
+  }, [tableData, searchQuery]);
+
+  // Helper: convert boolean status to API string
+  const boolToStatus = (bool) => (bool ? "active" : "inactive");
+
+  // API call to update status
+  const updateZoneStatus = async (ids, newStatus) => {
+    try {
+      setUpdateLoading(true);
+      const token = localStorage.getItem("token");
+      await axios.put(
+        URLS.UpdateZoneStatus,
+        {
+          ids,
+          status: boolToStatus(newStatus),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      await fetchZones(); 
+    } catch (err) {
+      console.error("Status update failed:", err);
+      setError("Failed to update status");
+    } finally {
+      setUpdateLoading(false);
+    }
+  };
+
+  // Individual toggle
+  const toggleStatus = (id) => {
+    const item = tableData.find((item) => item.id === id);
+    if (!item) return;
+    const newStatus = !item.Status;
+    updateZoneStatus([id], newStatus);
+  };
+
+  // Bulk actions
+  const handleBulkStatus = (status) => {
+    if (!selectedRows.length) return;
+    updateZoneStatus(selectedRows, status);
+    setSelectedRows([]);
   };
 
   // Row selection
@@ -34,18 +83,7 @@ export default function Zones() {
   };
 
   const handleSelectAll = (checked) => {
-    setSelectedRows(checked ? tableData.map((row) => row.id) : []);
-  };
-
-  // Bulk actions
-  const handleBulkStatus = (status) => {
-    if (!selectedRows.length) return;
-    setTableData((prev) =>
-      prev.map((item) =>
-        selectedRows.includes(item.id) ? { ...item, Status: status } : item
-      )
-    );
-    setSelectedRows([]);
+    setSelectedRows(checked ? filteredData.map((row) => row.id) : []);
   };
 
   // Columns definition
@@ -54,7 +92,7 @@ export default function Zones() {
       header: (
         <input
           type="checkbox"
-          checked={tableData.length > 0 && selectedRows.length === tableData.length}
+          checked={filteredData.length > 0 && selectedRows.length === filteredData.length}
           onChange={(e) => handleSelectAll(e.target.checked)}
         />
       ),
@@ -87,6 +125,7 @@ export default function Zones() {
             className={`form-check-input ${row.Status ? "bg-success" : "bg-danger"}`}
             checked={row.Status}
             onChange={() => toggleStatus(row.id)}
+            disabled={updateLoading}
           />
         </div>
       ),
@@ -107,7 +146,6 @@ export default function Zones() {
       header: "Actions",
       body: (row) => (
         <div className="edit-delete-action">
-          {/* Pass the zone ID in the URL */}
           <Link className="me-2 p-2" to={`/editZones/${row.id}`}>
             <i className="ti ti-edit" />
           </Link>
@@ -136,7 +174,7 @@ export default function Zones() {
         id: zone._id,
         Name: zone.name,
         priority: zone.priority,
-        Status: zone.status === "active", // convert to boolean if needed
+        Status: zone.status === "active",
         date: zone.logCreatedDate,
       }));
 
@@ -189,18 +227,30 @@ export default function Zones() {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link to="#" className="dropdown-item text-success" onClick={() => handleBulkStatus(true)}>
+                    <Link
+                      to="#"
+                      className="dropdown-item text-success"
+                      onClick={() => handleBulkStatus(true)}
+                    >
                       Active
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="dropdown-item text-danger" onClick={() => handleBulkStatus(false)}>
+                    <Link
+                      to="#"
+                      className="dropdown-item text-danger"
+                      onClick={() => handleBulkStatus(false)}
+                    >
                       Inactive
                     </Link>
                   </li>
                 </ul>
               </div>
-              <button className="btn btn-outline-success" disabled={!selectedRows.length}>
+              <button
+                className="btn btn-outline-success"
+                disabled={!selectedRows.length || updateLoading}
+                onClick={() => handleBulkStatus(true)}
+              >
                 Apply
               </button>
             </div>
@@ -209,12 +259,19 @@ export default function Zones() {
           </div>
 
           <div className="card-body">
-            <PrimeDataTable column={columns} data={tableData} totalRecords={tableData.length} rows={rows} />
+            <PrimeDataTable
+              column={columns}
+              data={filteredData}                     
+              totalRecords={filteredData.length}      
+              rows={rows}
+              currentPage={currentPage}               
+              setCurrentPage={setCurrentPage}         
+              
+            />
           </div>
         </div>
       </div>
       <CommonFooter />
-      
     </div>
   );
 }

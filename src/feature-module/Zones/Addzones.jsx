@@ -4,7 +4,7 @@ import { all_routes } from "../../routes/all_routes";
 import CommonFooter from "../../components/footer/commonFooter";
 import { URLS } from "../../url";
 import axios from "axios";
-import ZoneMap from "./Google-Map"; // Adjust import path
+import ZoneMap from "./Google-Map"; 
 
 const Addzones = () => {
   const route = all_routes;
@@ -13,10 +13,10 @@ const Addzones = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [polygonCoordinates, setPolygonCoordinates] = useState([]);
-  const [mapCenter, setMapCenter] = useState({ lat: 17.385044, lng: 78.486671 }); // Default center
+  const [mapCenter, setMapCenter] = useState({ lat: 17.385044, lng: 78.486671 }); 
   const [formData, setFormData] = useState({
     name: "",
-    place: "", // Unified field for search location / place of points
+    place: "", 
     priority: "",
     zoneType: "normal",
   });
@@ -93,7 +93,7 @@ const Addzones = () => {
 
       const payload = {
         name: formData.name,
-        place: formData.place, // Use the unified place field
+        place: formData.place, 
         priority: formData.priority,
         locations: locations,
         zoneType: formData.zoneType,
@@ -118,7 +118,7 @@ const Addzones = () => {
         zoneType: "normal",
       });
       setPolygonCoordinates([]);
-      setMapCenter({ lat: 17.385044, lng: 78.486671 }); // Reset to default
+      setMapCenter({ lat: 17.385044, lng: 78.486671 }); 
       setStatus(true);
     } catch (err) {
       console.error(err);
@@ -180,6 +180,7 @@ const Addzones = () => {
                               className="form-control"
                               value={formData.name}
                               onChange={handleChange}
+                              placeholder="Enter Zone Name"
                               required
                             />
                           </div>
@@ -191,7 +192,7 @@ const Addzones = () => {
                         <div className="col-sm-6 col-12 w-100">
                           <div className="mb-3 list position-relative">
                             <label className="form-label">
-                              Search Location / Place of Points
+                              Search Location 
                             </label>
                             <div className="d-flex gap-2">
                               <input
@@ -201,7 +202,7 @@ const Addzones = () => {
                                 value={formData.place}
                                 onChange={handleChange}
                                 placeholder="Enter a location to center the map"
-                                required
+                                // required
                               />
                               <button
                                 type="button"
@@ -230,6 +231,7 @@ const Addzones = () => {
                               className="form-control"
                               value={formData.priority}
                               onChange={handleChange}
+                              placeholder="Enter Priority"
                               required
                             />
                           </div>

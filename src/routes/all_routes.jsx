@@ -13,7 +13,7 @@ export const all_routes = {
   Addairportzones: "/Addairportzones",
   editairportzones: "/editairportZones/:id",
   Peakzones: "/Peakzones",
-  editpeakzones: "/Edit-Peak-Zones",
+  editpeakzones: "/Edit-Peak-Zones/:id",
   addpeakzones: "/addpeakZones",
   peakzonemap: "/PeakZoneMap",
   Allriders: "/Riders",
