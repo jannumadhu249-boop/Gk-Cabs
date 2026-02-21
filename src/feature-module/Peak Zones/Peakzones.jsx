@@ -93,6 +93,10 @@ export default function Peakzones() {
       field: "Name",
     },
     {
+      header: "Priority",
+      field: "priority",
+    },
+    {
       header: "Status",
       body: (row) => (
         <div className="form-check form-switch">
@@ -129,8 +133,7 @@ export default function Peakzones() {
               className="me-2 p-2"
               to="/Edit-Peak-Zones"
               title="Edit Zone"
-              // data-bs-toggle="modal"
-              // data-bs-target="#edit-units"
+
             >
               <i className="ti ti-edit" />
             </Link>

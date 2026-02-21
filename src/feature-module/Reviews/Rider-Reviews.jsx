@@ -129,27 +129,27 @@ export default function RiderReviews() {
             })
           : "--",
     },
-    // {
-    //   header: "Actions",
-    //   body: () => (
-    //     <div className="edit-delete-action">
-    //       <Link
-    //         className="me-2 p-2"
-    //         to="#"
-    //       >
-    //         <i className="ti ti-edit" />
-    //       </Link>
-    //       <Link
-    //         to="#"
-    //         className="p-2"
-    //         data-bs-toggle="modal"
-    //         data-bs-target="#delete-modal"
-    //       >
-    //         <i className="ti ti-trash" />
-    //       </Link>
-    //     </div>
-    //   ),
-    // },
+    {
+      header: "Actions",
+      body: () => (
+        <div className="edit-delete-action">
+          {/* <Link
+            className="me-2 p-2"
+            to="#"
+          >
+            <i className="ti ti-edit" />
+          </Link> */}
+          <Link
+            to="#"
+            className="p-2"
+            data-bs-toggle="modal"
+            data-bs-target="#delete-modal"
+          >
+            <i className="ti ti-trash" />
+          </Link>
+        </div>
+      ),
+    },
   ];
 
   /* ===================== JSX ===================== */

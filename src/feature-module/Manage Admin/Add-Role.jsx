@@ -76,56 +76,47 @@ const AddRolePermission = () => {
     "App Settings",
   ];
 
-  const actions = [
-    "All",
-    "Index",
-    "Create",
-    "Edit",
-    "Trash",
-    "Restore",
-    "Delete",
-  ];
+  const actions = ["All", "Index", "Create", "Edit", "Delete"];
 
+  const handleCheckboxChange = (module, action) => {
+    setPermissions((prev) => {
+      const modulePermissions = prev[module] || {};
 
-const handleCheckboxChange = (module, action) => {
-  setPermissions((prev) => {
-    const modulePermissions = prev[module] || {};
+      // If clicking "All"
+      if (action === "All") {
+        const isAllChecked = modulePermissions["All"];
 
-    // If clicking "All"
-    if (action === "All") {
-      const isAllChecked = modulePermissions["All"];
+        let updatedModule = {};
 
-      let updatedModule = {};
+        actions.forEach((act) => {
+          updatedModule[act] = !isAllChecked;
+        });
 
-      actions.forEach((act) => {
-        updatedModule[act] = !isAllChecked;
-      });
+        return {
+          ...prev,
+          [module]: updatedModule,
+        };
+      }
+
+      // If clicking other actions
+      const updatedModule = {
+        ...modulePermissions,
+        [action]: !modulePermissions[action],
+      };
+
+      // Check if all actions except "All" are selected
+      const allActionsSelected = actions
+        .filter((act) => act !== "All")
+        .every((act) => updatedModule[act]);
+
+      updatedModule["All"] = allActionsSelected;
 
       return {
         ...prev,
         [module]: updatedModule,
       };
-    }
-
-    // If clicking other actions
-    const updatedModule = {
-      ...modulePermissions,
-      [action]: !modulePermissions[action],
-    };
-
-    // Check if all actions except "All" are selected
-    const allActionsSelected = actions
-      .filter((act) => act !== "All")
-      .every((act) => updatedModule[act]);
-
-    updatedModule["All"] = allActionsSelected;
-
-    return {
-      ...prev,
-      [module]: updatedModule,
-    };
-  });
-};
+    });
+  };
 
   const handleSelectAll = () => {
     const allSelected = permissionModules.every((module) =>

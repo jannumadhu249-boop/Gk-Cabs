@@ -1,28 +1,21 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PrimeDataTable from "../../components/data-table";
-import { CouponData } from "../../core/json/Coupons";
-import EditZones from "../../core/modals/coupons/editcoupons";
 import CommonFooter from "../../components/footer/commonFooter";
 import DeleteModal from "../../components/delete-modal";
 import SearchFromApi from "../../components/data-table/search";
+import { URLS } from "../../url";
+import axios from "axios";
 
 export default function AirportZones() {
-  /* ===================== STATE ===================== */
-  const [rows, setRows] = useState(5);
+  const [rows, setRows] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const [tableData, setTableData] = useState(
-    CouponData.map((item) => ({
-      ...item,
-      Status: item.Status ?? true, // default Active
-    }))
-  );
-
-  /* ===================== HANDLERS ===================== */
-
+  // Handlers
   const handleSearch = (value) => setSearchQuery(value);
 
   const toggleStatus = (id) => {
@@ -33,13 +26,10 @@ export default function AirportZones() {
     );
   };
 
-  /* ===================== ROW SELECTION ===================== */
-
+  // Row selection
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
-      prev.includes(id)
-        ? prev.filter((rowId) => rowId !== id)
-        : [...prev, id]
+      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
     );
   };
 
@@ -47,32 +37,24 @@ export default function AirportZones() {
     setSelectedRows(checked ? tableData.map((row) => row.id) : []);
   };
 
-  /* ===================== BULK ACTIONS ===================== */
-
+  // Bulk actions
   const handleBulkStatus = (status) => {
     if (!selectedRows.length) return;
-
     setTableData((prev) =>
       prev.map((item) =>
-        selectedRows.includes(item.id)
-          ? { ...item, Status: status }
-          : item
+        selectedRows.includes(item.id) ? { ...item, Status: status } : item
       )
     );
     setSelectedRows([]);
   };
 
-  /* ===================== COLUMNS ===================== */
-
+  // Columns definition
   const columns = [
     {
       header: (
         <input
           type="checkbox"
-          checked={
-            tableData.length > 0 &&
-            selectedRows.length === tableData.length
-          }
+          checked={tableData.length > 0 && selectedRows.length === tableData.length}
           onChange={(e) => handleSelectAll(e.target.checked)}
         />
       ),
@@ -93,14 +75,16 @@ export default function AirportZones() {
       field: "Name",
     },
     {
+      header: "Priority",
+      field: "priority",
+    },
+    {
       header: "Status",
       body: (row) => (
         <div className="form-check form-switch">
           <input
             type="checkbox"
-            className={`form-check-input ${
-              row.Status ? "bg-success" : "bg-danger"
-            }`}
+            className={`form-check-input ${row.Status ? "bg-success" : "bg-danger"}`}
             checked={row.Status}
             onChange={() => toggleStatus(row.id)}
           />
@@ -121,62 +105,76 @@ export default function AirportZones() {
     },
     {
       header: "Actions",
-      body: () => (
+      body: (row) => (
         <div className="edit-delete-action">
-          <Link
-            className="me-2 p-2"
-            to="/editairportZones"
-          >
+          {/* Pass the zone ID in the URL */}
+          <Link className="me-2 p-2" to={`/editairportZones/${row.id}`}>
             <i className="ti ti-edit" />
-          </Link>
-          <Link
-            to="#"
-            className="p-2"
-            data-bs-toggle="modal"
-            data-bs-target="#delete-modal"
-          >
-            <i className="ti ti-trash" />
           </Link>
         </div>
       ),
     },
   ];
 
-  /* ===================== JSX ===================== */
+  // Fetch zones
+  const fetchZones = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.post(
+        URLS.GetAllZones,
+        { zoneType: "airpot" },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      const zones = res.data?.zones || [];
+      const formattedData = zones.map((zone) => ({
+        id: zone._id,
+        Name: zone.name,
+        priority: zone.priority,
+        Status: zone.status === "active", 
+        date: zone.logCreatedDate,
+      }));
+
+      setTableData(formattedData);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch zones");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchZones();
+  }, []);
 
   return (
     <div className="page-wrapper">
       <div className="content">
         <div className="page-header d-flex justify-content-between">
-          <div>
-            <h4>Airport Zones</h4>
-            <h6>Manage Your Airport Zones</h6>
-          </div>
-          <Link to="/Addairportzones" className="btn btn-primary">
-            <i className="ti ti-circle-plus me-1" /> Add Airport Zones
+          <h4>Airport Zones</h4>
+          <Link to="/AddAirportZones" className="btn btn-primary">
+            <i className="ti ti-circle-plus me-1" /> Add Airport Zone
           </Link>
         </div>
 
         <div className="card table-list-card">
           <div className="card-header d-flex justify-content-between flex-wrap gap-2">
             <div className="d-flex gap-2 flex-wrap">
-              {/* Rows Dropdown */}
+              {/* Rows dropdown */}
               <div className="dropdown">
-                <Link
-                  to="#"
-                  className="btn btn-white dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                >
+                <Link to="#" className="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
                   {rows}
                 </Link>
                 <ul className="dropdown-menu">
                   {[5, 10, 15, 20, 25].map((num) => (
                     <li key={num}>
-                      <Link
-                        to="#"
-                        className="dropdown-item"
-                        onClick={() => setRows(num)}
-                      >
+                      <Link to="#" className="dropdown-item" onClick={() => setRows(num)}>
                         {num}
                       </Link>
                     </li>
@@ -184,65 +182,38 @@ export default function AirportZones() {
                 </ul>
               </div>
 
-              {/* Bulk Actions */}
-              <div className="dropdown me-2">
-                <Link
-                  to="#"
-                  className="btn btn-white dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                >
+              {/* Bulk actions */}
+              <div className="dropdown">
+                <Link to="#" className="btn btn-white dropdown-toggle" data-bs-toggle="dropdown">
                   Bulk Actions
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link
-                      to="#"
-                      className="dropdown-item text-success"
-                      onClick={() => handleBulkStatus(true)}
-                    >
+                    <Link to="#" className="dropdown-item text-success" onClick={() => handleBulkStatus(true)}>
                       Active
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to="#"
-                      className="dropdown-item text-danger"
-                      onClick={() => handleBulkStatus(false)}
-                    >
+                    <Link to="#" className="dropdown-item text-danger" onClick={() => handleBulkStatus(false)}>
                       Inactive
                     </Link>
                   </li>
                 </ul>
               </div>
-
-              <button
-                className="btn btn-outline-success"
-                disabled={!selectedRows.length}
-              >
+              <button className="btn btn-outline-success" disabled={!selectedRows.length}>
                 Apply
               </button>
             </div>
 
-            <SearchFromApi
-              callback={handleSearch}
-              rows={rows}
-              setRows={setRows}
-            />
+            <SearchFromApi callback={handleSearch} rows={rows} setRows={setRows} />
           </div>
 
           <div className="card-body">
-            <PrimeDataTable
-              column={columns}
-              data={tableData}
-              totalRecords={tableData.length}
-              rows={rows}
-            />
+            <PrimeDataTable column={columns} data={tableData} totalRecords={tableData.length} rows={rows} />
           </div>
         </div>
       </div>
-
       <CommonFooter />
-      <EditZones />
       <DeleteModal />
     </div>
   );

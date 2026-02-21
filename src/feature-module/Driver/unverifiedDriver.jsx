@@ -11,7 +11,7 @@ import { Search } from "react-feather";
 export default function UnverifiedDriver() {
   /* ===================== STATE ===================== */
   const [searchQuery, setSearchQuery] = useState("");
-  const [rows, setRows] = useState(10);
+  const [rows, setRows] = useState(5);
   const [tableData, setTableData] = useState(CouponData);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -102,6 +102,10 @@ export default function UnverifiedDriver() {
     {
       header: "Email",
       field: "Email",
+    },
+    {
+      header: "Zone",
+      field: "zone",
     },
     {
       header: "Status",
@@ -269,8 +273,8 @@ export default function UnverifiedDriver() {
               <div className="table-responsive">
                 <PrimeDataTable
                   column={columns}
-                //   data={tableData}
-                //   totalRecords={tableData.length}
+                  data={tableData}
+                  totalRecords={tableData.length}
                   rows={rows}
                 />
               </div>

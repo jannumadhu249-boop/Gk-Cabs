@@ -129,8 +129,7 @@ export default function RolePermission() {
               className="me-2 p-2"
               to="/Edit-Role"
               title="Edit Zone"
-              // data-bs-toggle="modal"
-              // data-bs-target="#edit-units"
+
             >
               <i className="ti ti-edit" />
             </Link>

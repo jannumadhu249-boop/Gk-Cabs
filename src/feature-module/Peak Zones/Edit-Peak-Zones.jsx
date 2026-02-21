@@ -82,11 +82,24 @@ const EditPeakZones = () => {
                             <div className="mb-3 list position-relative">
                               <label className="form-label">
                                 Search Location
-                                <span className="text-danger ms-1">*</span>
+                                
                               </label>
                               <input
                                 type="text"
                                 className="form-control list"
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                                                <div className="row">
+                          <div className="col-sm-6 col-12 w-100">
+                            <div className="mb-3 list position-relative">
+                              <label className="form-label">Priority</label>
+                              <input
+                                type="number"
+                                className="form-control"
+                                required
                               />
                             </div>
                           </div>
@@ -155,17 +168,7 @@ const EditPeakZones = () => {
           </div>
           {/* /add */}
         </div>
-        {/* <div className="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-          <p className="mb-0 text-gray-9">
-            2014 - 2026 © Gk Cabs. All Right Reserved
-          </p>
-          <p>
-            Designed &amp; Developed by{" "}
-            <Link to="#" className="text-primary">
-              Gk Cabs
-            </Link>
-          </p>
-        </div> */}
+
 
         <CommonFooter />
       </div>

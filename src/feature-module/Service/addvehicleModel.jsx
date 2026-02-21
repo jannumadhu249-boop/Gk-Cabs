@@ -1,82 +1,133 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { all_routes } from "../../routes/all_routes";
+import { URLS } from "../../url";
 
 const AddVehicleModel = () => {
   const route = all_routes;
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    groupName: "",
-    modelName: "",
-    priority: "",
+    name: "",
     seater: "",
+    priority: "",
+    vehicleGroupId: "",
   });
 
-  // COMMON HANDLER
+  const [vehicleGroups, setVehicleGroups] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [fetchingGroups, setFetchingGroups] = useState(false);
+  const [error, setError] = useState("");
+
+  // Fetch vehicle groups for dropdown
+  useEffect(() => {
+    const fetchGroups = async () => {
+      setFetchingGroups(true);
+      try {
+        const res = await axios.post(
+          URLS.GetAllVehicleGroup,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const groups = res.data?.groups || res.data?.data || [];
+        setVehicleGroups(groups);
+      } catch (err) {
+        console.error("Failed to fetch vehicle groups", err);
+        setError("Could not load vehicle groups");
+      } finally {
+        setFetchingGroups(false);
+      }
+    };
+    fetchGroups();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  //   const handleImageChange = (e) => {
-  //     const file = e.target.files[0];
-  //     if (file) {
-  //       setFormData((prev) => ({
-  //         ...prev,
-  //         image: file,
-  //       }));
-  //     }
-  //   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Vehicle Model Data:", formData);
+    setLoading(true);
+    setError("");
+
+    const payload = {
+      name: formData.name,
+      seater: formData.seater,
+      priority: formData.priority,
+      vehicleGroupId: formData.vehicleGroupId,
+      status: "pending", // default status
+    };
+
+    try {
+      await axios.post(URLS.AddVehicleModel, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      navigate(route.vehiclemodel); // adjust to your actual list route
+    } catch (err) {
+      console.error("Add vehicle model error:", err);
+      setError(err.response?.data?.message || "Failed to add vehicle model");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="page-wrapper">
       <div className="content">
-        <div className="page-header">
+        <div className="page-header d-flex justify-content-between align-items-center">
           <div className="page-title">
             <h4>Add Vehicle Model</h4>
           </div>
-          <Link to="/vehicleGroup" className="btn btn-secondary">
+          <Link to={route.vehiclemodel} className="btn btn-secondary">
             <i className="feather icon-arrow-left me-2" />
             Back to Vehicle Model
           </Link>
         </div>
 
+        {error && <div className="alert alert-danger">{error}</div>}
+
         <form onSubmit={handleSubmit}>
           <div className="accordion-item border mb-4">
             <div className="accordion-body">
               <div className="row">
-                {/* DRIVER */}
+                {/* Group Name Dropdown */}
                 <div className="col-md-6 mb-3">
                   <label className="form-label">Group Name</label>
                   <select
-                    type="text"
-                    name="groupName"
+                    name="vehicleGroupId"
                     className="form-select"
-                    value={formData.groupnameName}
+                    value={formData.vehicleGroupId}
                     onChange={handleChange}
                     required
+                    disabled={fetchingGroups}
                   >
-                    <option value="">Select Group Name</option>
-                    <option value="Admin">Cab</option>
-                    <option value="User">Sedan</option>
-                    <option value="Manager">SUV</option>
-                    <option value="Support">Prime SUV</option>
+                    <option value="">Select Group</option>
+                    {vehicleGroups.map((group) => (
+                      <option key={group._id} value={group._id}>
+                        {group.name}
+                      </option>
+                    ))}
                   </select>
+                  {fetchingGroups && (
+                    <small className="text-muted">Loading groups...</small>
+                  )}
                 </div>
 
-                {/* Priority */}
-                <div className="col-md-6">
+                {/* Model Name */}
+                <div className="col-md-6 mb-3">
                   <label className="form-label">Model Name</label>
                   <input
                     type="text"
+                    name="name"
                     className="form-control"
                     placeholder="Enter Model"
                     value={formData.name}
@@ -87,38 +138,42 @@ const AddVehicleModel = () => {
               </div>
 
               <div className="row">
-                {/* Decription */}
+                {/* Seater */}
                 <div className="col-md-6 mb-3">
                   <label className="form-label">Seater</label>
                   <input
                     type="text"
-                    name="seatername"
+                    name="seater"
                     className="form-control"
-                    value={formData.name}
-                    onChange={handleChange}
                     placeholder="Enter Seater"
+                    value={formData.seater}
+                    onChange={handleChange}
                     required
                   />
                 </div>
 
-                {/* Down Grade */}
-                <div className="col-md-6">
+                {/* Priority */}
+                <div className="col-md-6 mb-3">
                   <label className="form-label">Priority</label>
                   <input
                     type="number"
+                    name="priority"
                     className="form-control"
                     placeholder="Enter Priority"
-                    value={formData.priority || ""}
-                    onChange={(e) =>
-                      setFormData({ ...formData, priority: e.target.value })
-                    }
+                    value={formData.priority}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
 
               <div className="text-end mt-3">
-                <button type="submit" className="btn btn-outline-success">
-                  Add Vehicle Model
+                <button
+                  type="submit"
+                  className="btn btn-outline-success"
+                  disabled={loading || fetchingGroups}
+                >
+                  {loading ? "Adding..." : "Add Vehicle Model"}
                 </button>
               </div>
             </div>

@@ -26,7 +26,7 @@ const Signin = () => {
     setError("");
 
     try {
-      const response = await axios.post(URLS.login, {
+      const response = await axios.post(URLS.AdminLogin, {
         email: email.trim(),
         password: password.trim(),
       });

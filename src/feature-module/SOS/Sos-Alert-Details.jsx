@@ -1,4 +1,3 @@
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import CommonFooter from "../../components/footer/commonFooter";
 
@@ -25,7 +24,18 @@ const SosAlertDetails = () => {
       <div className="container-fluid py-4" style={{ background: "#f4f6f9" }}>
         <div className="container">
           {/* HEADER */}
-          <h4 className="fw-bold mb-4">Sos Alert Details</h4>
+
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h4 className="fw-bold mb-0">Sos Alert Details</h4>
+
+            <div style={{ minWidth: "180px" }}>
+              <select className="form-select">
+                <option value="requested">Requested</option>
+                <option value="processing">Processing</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
 
           <div className="row g-4">
             {/* LEFT SIDE */}

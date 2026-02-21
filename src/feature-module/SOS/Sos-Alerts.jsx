@@ -14,7 +14,10 @@ export default function SosAlerts() {
   const [tableData, setTableData] = useState(
     CouponData.map((item) => ({
       ...item,
-      Status: item.Status ?? true, // default Active
+      Status: item.Status
+        ? item.Status.charAt(0).toUpperCase() +
+          item.Status.slice(1).toLowerCase()
+        : "Processing",
     })),
   );
 
@@ -86,18 +89,13 @@ export default function SosAlerts() {
     },
     {
       header: "Status",
-      body: (row) => (
-        <div className="form-check form-switch">
-          <input
-            type="checkbox"
-            className={`form-check-input ${
-              row.Status ? "bg-success" : "bg-danger"
-            }`}
-            checked={row.Status}
-            onChange={() => toggleStatus(row.id)}
-          />
-        </div>
-      ),
+      body: (row) => {
+        let badgeClass = "bg-warning text-dark";
+        if (row.Status === "Completed") badgeClass = "bg-success";
+        if (row.Status === "Requested") badgeClass = "bg-danger";
+
+        return <span className={`badge ${badgeClass}`}>{row.Status}</span>;
+      },
     },
     {
       header: "Created Date",

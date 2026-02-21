@@ -35,7 +35,7 @@ export const SidebarData = [
         submenu: true,
         showSubRoute: false,
         submenuItems: [
-          { label: "All Airport Zones", link: "/Airportzones"},
+          { label: "All Airport Zones", link: "/airportzones"},
           { label: "Add Airportzones", link: "/addairportzones"}
         ]
       },
@@ -99,7 +99,7 @@ export const SidebarData = [
         showSubRoute: false,
         submenuItems:[
           { label: "Serivce Categories", link: "/serviceCategorie"},
-          { label: "Vehicles Group", link: "/vehicleType"},
+          { label: "Vehicles Group", link: "/Vehicle-Group"},
           { label: "Vehicle Model", link: "/vehicleModel"},
         ]
       },
@@ -122,8 +122,8 @@ export const SidebarData = [
       },
       {
         label: "Advertising Banners",
-        icon: "ti ti-map-pin-star",
-        link: "/popularDestionation",
+        icon: "ti ti-ad",
+        link: "/Advertising-Banner",
         submenu: false,
         showSubRoute: false,
       },
@@ -162,16 +162,37 @@ export const SidebarData = [
         submenu: false,
         showSubRoute: false,
       },
-      // {
-      //   label: "Reviews",
-      //   icon: "ti ti-star",
-      //   submenu: true,
-      //   showSubRoute: false,
-      //   submenuItems:[
-      //     { label: "Rider Reviews", link: "#"},
-      //     { label: "Driver Reviews", link: "#"},
-      //   ]
-      // },
+      {
+        label: "Reviews",
+        icon: "ti ti-star",
+        submenu: true,
+        showSubRoute: false,
+        submenuItems:[
+          { label: "Rider Reviews", link: "/Rider-Reviews"},
+          { label: "Driver Reviews", link: "/Driver-Reviews"},
+        ]
+      },
+      {
+        label: "Refferrals",
+        icon: "ti ti-link",
+        link: "/Refferral",
+        submenu: false,
+        showSubRoute: false,
+      },
+     {
+        label: "Reports",
+        icon: "ti ti-report",
+        submenu: true,
+        showSubRoute: false,
+        submenuItems:[
+          { label: "Transction Reports", link: "#"},
+          { label: "Ride Reports", link: "#"},
+          { label: "Driver Reports", link: "#"},
+          { label: "Coupon Reports", link: "#"},
+          { label: "Zone Reports", link: "#"},
+          { label: "Incentive Reports", link: "#"},
+        ]
+      },
       {
         label: "Heat Map",
         icon: "ti ti-map",

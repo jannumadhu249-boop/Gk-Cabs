@@ -1,67 +1,156 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { debounce } from "../../utils/debounce";
 import PrimeDataTable from "../../components/data-table";
-import { CouponData } from "../../core/json/Coupons";
 import CommonFooter from "../../components/footer/commonFooter";
 import SearchFromApi from "../../components/data-table/search";
+import { URLS } from "../../url";
 
 export default function VehicleModel() {
   /* ===================== STATE ===================== */
   const [rows, setRows] = useState(5);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [bulkLoading, setBulkLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const [tableData, setTableData] = useState(
-    CouponData.map((item) => ({
-      ...item,
-      Status: item.Status
-        ? item.Status.charAt(0).toUpperCase() +
-          item.Status.slice(1).toLowerCase()
-        : "Pending",
-    })),
+  // Debounced search
+  const debouncedSetSearchTerm = useCallback(
+    debounce((value) => setSearchTerm(value), 500),
+    []
   );
 
-  /* ===================== ROW SELECTION ===================== */
+  const handleSearch = (value) => {
+    setSearchQuery(value);
+    debouncedSetSearchTerm(value);
+  };
+
+  // ROW SELECTION
   const handleRowSelect = (id) => {
     setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id],
+      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
     );
   };
 
   const handleSelectAll = (checked) => {
-    setSelectedRows(checked ? visibleData.map((row) => row.id) : []);
+    setSelectedRows(checked ? tableData.map((row) => row.id) : []);
   };
 
-  /* ===================== STATUS ACTIONS ===================== */
-  const activeVehicle = (id) => {
+  /* ===================== STATUS ACTIONS (LOCAL - REPLACE WITH API CALLS) ===================== */
+  const approveVehicle = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Active" } : item,
-      ),
+        item.id === id ? { ...item, status: "approved" } : item
+      )
     );
   };
 
-  const inactiveVehicle = (id) => {
+  const rejectVehicle = (id) => {
     setTableData((prev) =>
       prev.map((item) =>
-        item.id === id ? { ...item, Status: "Inactive" } : item,
-      ),
+        item.id === id ? { ...item, status: "rejected" } : item
+      )
     );
   };
 
-  /* ===================== BULK MOVE TO TRASH ===================== */
-  const handleBulkTrash = () => {
+  // BULK STATUS UPDATE API (adjust endpoint and mapping)
+  const handleBulkStatus = async (newStatus) => {
     if (!selectedRows.length) return;
 
-    setTableData((prev) =>
-      prev.map((item) =>
-        selectedRows.includes(item.id) ? { ...item, Status: "Trash" } : item,
-      ),
-    );
-    setSelectedRows([]);
+    setBulkLoading(true);
+    setError("");
+
+    try {
+      const payload = {
+        ids: selectedRows,
+        status: newStatus, // "approved", "rejected", etc.
+      };
+
+      // Replace with your actual bulk update URL
+      await axios.put(URLS.UpdateVehicleModelStatus, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      await fetchVehicleModel(searchTerm);
+      setSelectedRows([]);
+    } catch (err) {
+      console.error("Bulk update error:", err);
+      setError("Failed to update status for selected items");
+    } finally {
+      setBulkLoading(false);
+    }
   };
 
-  /* ===================== FILTER DATA ===================== */
-  const visibleData = tableData.filter((item) => item.Status !== "Trash");
+  /* ===================== FETCH VEHICLE MODELS ===================== */
+  const fetchVehicleModel = async (search = "") => {
+    setLoading(true);
+    setError("");
+    try {
+      const url = search
+        ? `${URLS.GetAllVehicleModel}?searchQuery=${encodeURIComponent(search)}`
+        : URLS.GetAllVehicleModel;
+
+      const res = await axios.post(
+        url,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      // Log response to check structure
+
+      // Extract the array of models (adjust based on actual response)
+      let vechileModels = res.data?.vechileModels;
+
+      // if (Array.isArray(res.data)) {
+      //   vechileModels = res.data;
+      // } else if (res.data?.vehicleModels) {
+      //   vechileModels = res.data.vehicleModels;
+      // } else if (res.data?.data) {
+      //   vechileModels = res.data.data;
+      // } else if (res.data?.models) {
+      //   vechileModels = res.data.models;
+      // } else {
+      //   vechileModels = [];
+      // }
+
+      
+
+      const formattedData = vechileModels.map((vehicleModel) => ({
+        id: vehicleModel._id,
+        groupname: vehicleModel.vehicleGroupName || "—",
+        modelname: vehicleModel.name || "—",
+        seater: vehicleModel.seater || "—",
+        priority: vehicleModel.priority || "—",
+        status: vehicleModel.status || "pending", 
+      }));
+
+      setTableData(formattedData);
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setError("Failed to fetch vehicle models");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch on mount and when searchTerm changes
+  useEffect(() => {
+    fetchVehicleModel(searchTerm);
+  }, [searchTerm]);
+
+  // If you want to filter out any status (e.g., "trash"), you can do it here
+  const visibleData = tableData.filter(item => item.status !== "trash");
 
   /* ===================== COLUMNS ===================== */
   const columns = [
@@ -70,9 +159,10 @@ export default function VehicleModel() {
         <input
           type="checkbox"
           checked={
-            visibleData.length > 0 && selectedRows.length === visibleData.length
+            tableData.length > 0 && selectedRows.length === tableData.length
           }
           onChange={(e) => handleSelectAll(e.target.checked)}
+          disabled={loading || bulkLoading}
         />
       ),
       body: (row) => (
@@ -80,6 +170,7 @@ export default function VehicleModel() {
           type="checkbox"
           checked={selectedRows.includes(row.id)}
           onChange={() => handleRowSelect(row.id)}
+          disabled={loading || bulkLoading}
         />
       ),
     },
@@ -87,10 +178,6 @@ export default function VehicleModel() {
       header: "Sl.No",
       body: (_row, options) => options.rowIndex + 1,
     },
-    // {
-    //   header: "ID",
-    //   field: "id",
-    // },
     {
       header: "Group Name",
       field: "groupname",
@@ -110,42 +197,47 @@ export default function VehicleModel() {
     {
       header: "Status",
       body: (row) => {
-        let badgeClass = "bg-warning text-dark";
-        if (row.Status === "Active") badgeClass = "bg-success";
-        if (row.Status === "Inactive") badgeClass = "bg-danger";
+        let badgeClass = "bg-secondary"; // default
+        if (row.status === "pending") badgeClass = "bg-warning text-dark";
+        if (row.status === "approved") badgeClass = "bg-success";
+        if (row.status === "rejected") badgeClass = "bg-danger";
 
-        return <span className={`badge ${badgeClass}`}>{row.Status}</span>;
+        return (
+          <span className={`badge ${badgeClass}`}>
+            {row.status.charAt(0).toUpperCase() + row.status.slice(1)}
+          </span>
+        );
       },
     },
     {
       header: "Actions",
       body: (row) => (
         <div className="edit-delete-action d-flex align-items-center">
-          {/* VIEW */}
-          <Link className="me-2 p-2" to="/EditVehicleModel" title="Edit">
+          {/* Edit */}
+          <Link
+            className="me-2 p-2"
+            to={`/EditVehicleModel/${row.id}`}
+            title="Edit"
+          >
             <i className="ti ti-edit" />
           </Link>
-          {/* 
-          <Link className="me-2 p-2" to="#" title="Delete">
-            <i className="ti ti-trash" />
-          </Link> */}
 
-          {/* APPROVE */}
+          {/* Approve */}
           <button
             className="btn p-2 text-success"
-            title="Active"
-            onClick={() => activeVehicle(row.id)}
-            disabled={row.Status === "Active"}
+            title="Approve"
+            onClick={() => approveVehicle(row.id)}
+            disabled={row.status === "approved" || bulkLoading}
           >
             <i className="ti ti-check" />
           </button>
 
-          {/* REJECT */}
+          {/* Reject */}
           <button
             className="btn p-2 text-danger"
-            title="Inactive"
-            onClick={() => inactiveVehicle(row.id)}
-            disabled={row.Status === "Inactive"}
+            title="Reject"
+            onClick={() => rejectVehicle(row.id)}
+            disabled={row.status === "rejected" || bulkLoading}
           >
             <i className="ti ti-x" />
           </button>
@@ -162,14 +254,14 @@ export default function VehicleModel() {
           <h4>List of Vehicle Model</h4>
           <Link to="/addvehicleModel" className="btn btn-outline-success">
             <i className="ti ti-circle-plus me-1" />
-            Add New Model{" "}
+            Add New Model
           </Link>
         </div>
 
         <div className="card table-list-card">
           <div className="card-header d-flex justify-content-between flex-wrap gap-2">
             <div className="d-flex gap-2 flex-wrap">
-              {/* Rows */}
+              {/* Rows Dropdown */}
               <div className="dropdown">
                 <Link
                   to="#"
@@ -193,7 +285,7 @@ export default function VehicleModel() {
                 </ul>
               </div>
 
-              {/* Bulk */}
+              {/* Bulk Actions */}
               <div className="dropdown">
                 <Link
                   to="#"
@@ -204,39 +296,67 @@ export default function VehicleModel() {
                 </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <Link
-                      to="#"
-                      className="dropdown-item text-danger"
-                      onClick={handleBulkTrash}
+                    <button
+                      className="dropdown-item text-success"
+                      onClick={() => handleBulkStatus("approved")}
+                      disabled={!selectedRows.length || bulkLoading}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        width: "100%",
+                        textAlign: "left",
+                      }}
                     >
-                      <i className="ti ti-trash me-2" />
-                      Move to Trash
-                    </Link>
+                      <i className="ti ti-check me-2" />
+                      Approve
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={() => handleBulkStatus("rejected")}
+                      disabled={!selectedRows.length || bulkLoading}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        width: "100%",
+                        textAlign: "left",
+                      }}
+                    >
+                      <i className="ti ti-x me-2" />
+                      Reject
+                    </button>
                   </li>
                 </ul>
               </div>
 
               <button
                 className="btn btn-outline-success"
-                onClick={handleBulkTrash}
-                disabled={!selectedRows.length}
+                onClick={() => handleBulkStatus("approved")}
+                disabled={!selectedRows.length || bulkLoading}
               >
                 Apply
               </button>
             </div>
 
-            <SearchFromApi rows={rows} setRows={setRows} />
+            <SearchFromApi
+              callback={handleSearch}
+              rows={rows}
+              setRows={setRows}
+            />
           </div>
 
           <div className="card-body">
-            <div className="table-responsive">
+            {loading && <div className="text-center py-3">Loading...</div>}
+            {error && <div className="alert alert-danger">{error}</div>}
+            {!loading && !error && (
               <PrimeDataTable
                 column={columns}
-                data={visibleData}
-                totalRecords={visibleData.length}
+                data={tableData}
+                totalRecords={tableData.length}
                 rows={rows}
               />
-            </div>
+            )}
           </div>
         </div>
       </div>

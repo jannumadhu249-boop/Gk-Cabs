@@ -34,7 +34,6 @@ import Leaflet from "../feature-module/uiinterface/map/leaflet";
 import DataTables from "../feature-module/uiinterface/table/data-tables";
 import TablesBasic from "../feature-module/uiinterface/table/tables-basic";
 import Pos from "../feature-module/pos/pos";
-import Zones from "../feature-module/Zones/zones";
 import Addzones from "../feature-module/Zones/Addzones";
 import AirportZones from "../feature-module/Airportzones/airportzones";
 import Addairportzones from "../feature-module/Airportzones/Addairportzones";
@@ -52,7 +51,7 @@ import DriverMap from "../feature-module/Driver/driverLocation";
 import Addcoupons from "../core/modals/coupons/addcoupons";
 import Adddriverdocument from "../feature-module/Driver/addDocument";
 import SerivceCategorie from "../feature-module/Service/serviceCategorie";
-import VehicleType from "../feature-module/Service/vehicleType";
+import VehicleGroups from "../feature-module/Service/Vehicle-Group";
 import VehicleZone from "../feature-module/Service/vehicleZone";
 import SetWorldPrice from "../feature-module/Service/setworldPrice";
 import AddIncentivesModal from "../feature-module/Service/addIncentive";
@@ -62,8 +61,8 @@ import EditZones from "../feature-module/Zones/editZones";
 import EditServiceCategory from "../feature-module/Service/editServices";
 import PushNotification from "../feature-module/Push Notification/pushNotification";
 import SendNotification from "../feature-module/Push Notification/sendpushNotification";
-import PopularDestionation from "../feature-module/Popular Destionation/popularDestionation";
-import AddNewDestionation from "../feature-module/Popular Destionation/addDestionation";
+import AdvertisingBanner from "../feature-module/Advertising Banners/Advertising-Banner";
+import AddBanner from "../feature-module/Advertising Banners/Add-Banner";
 import WalletComments from "../feature-module/Wallet Comments/walletComments";
 import AddComments from "../feature-module/Wallet Comments/addComments";
 import VehicleGroup from "../feature-module/Vehicle Manage/vehicleGroup";
@@ -122,6 +121,14 @@ import EditSos from "../feature-module/SOS/EditSos";
 import SosAlerts from "../feature-module/SOS/Sos-Alerts";
 import SosAlertDetails from "../feature-module/SOS/Sos-Alert-Details";
 import HeatMap from "../feature-module/Heat Map/Heat-Map";
+import EditPreference from "../feature-module/Preference/Edit-Preference";
+import EditBanner from "../feature-module/Advertising Banners/Edit-Banner";
+import RiderReviews from "../feature-module/Reviews/Rider-Reviews";
+import DriverReviews from "../feature-module/Reviews/Driver-Reviews";
+import Refferrals from "../feature-module/Refferrals/Refferral";
+import ViewWithdrawRequestDetails from "../feature-module/Driver/View-Withdraw-Request-Details";
+import ZoneMap from "../feature-module/Zones/Google-Map";
+import Zones from "../feature-module/Zones/Zones";
 
 const ProductList = lazy(
   () => import("../feature-module/inventory/productlist"),
@@ -656,6 +663,34 @@ const routes = all_routes;
 export const authRoutes = [
   {
     id: 1,
+    path: routes.viewwithdrawrequestdetails,
+    name: "Driver",
+    element: <ViewWithdrawRequestDetails />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.refferral,
+    name: "Refferral",
+    element: <Refferrals />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.driverreviews,
+    name: "Reviews",
+    element: <DriverReviews />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.riderreviews,
+    name: "Reviews",
+    element: <RiderReviews />,
+    route: Route,
+  },
+  {
+    id: 1,
     path: routes.heatmap,
     name: "Heat Map",
     element: <HeatMap />,
@@ -808,28 +843,28 @@ export const authRoutes = [
     element: <ViewRiderDetails />,
     route: Route,
   },
-    {
+  {
     id: 1,
     path: routes.locationsettings,
     name: "App Settings",
     element: <LocationSettings />,
     route: Route,
   },
-    {
+  {
     id: 1,
     path: routes.refferal,
     name: "App Settings",
     element: <RefferalSettings />,
     route: Route,
   },
-    {
+  {
     id: 1,
     path: routes.walletsettings,
     name: "App Settings",
     element: <WalletSettings />,
     route: Route,
   },
-    {
+  {
     id: 1,
     path: routes.ridesettings,
     name: "App Settings",
@@ -876,6 +911,13 @@ export const authRoutes = [
     path: routes.changepassword,
     name: "Change Password",
     element: <ChangePassword />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.editpreference,
+    name: "Preference",
+    element: <EditPreference />,
     route: Route,
   },
   {
@@ -1027,16 +1069,23 @@ export const authRoutes = [
   },
   {
     id: 1,
-    path: routes.adddestionation,
-    name: "PopularDestionation",
-    element: <AddNewDestionation />,
+    path: routes.editbanner,
+    name: "Advertising Banner",
+    element: <EditBanner />,
     route: Route,
   },
   {
     id: 1,
-    path: routes.popualrdestionation,
-    name: "PopularDestionation",
-    element: <PopularDestionation />,
+    path: routes.addbanner,
+    name: "Advertising Banner",
+    element: <AddBanner />,
+    route: Route,
+  },
+  {
+    id: 1,
+    path: routes.advertisingbanner,
+    name: "Advertising Banner",
+    element: <AdvertisingBanner />,
     route: Route,
   },
   {
@@ -1076,9 +1125,9 @@ export const authRoutes = [
   },
   {
     id: 1,
-    path: routes.vehicletype,
+    path: routes.vehiclegroups,
     name: "Service",
-    element: <VehicleType />,
+    element: <VehicleGroups />,
     route: Route,
   },
   {
@@ -1204,7 +1253,7 @@ export const authRoutes = [
     id: 1,
     path: routes.addpeakzones,
     name: "Peakzones",
-    element: <AddPeakzones   />,
+    element: <AddPeakzones />,
     route: Route,
   },
   {
@@ -1264,12 +1313,6 @@ export const authRoutes = [
     element: <Dashboard />,
     route: Route,
   },
-
-
-
-
-
-
 
   {
     id: 1,
